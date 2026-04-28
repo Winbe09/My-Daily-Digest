@@ -147,6 +147,6 @@ INDEX_FILENAME  = "index.html"
 # -----------------------------------------------------------------------------
 # AI MODEL
 # -----------------------------------------------------------------------------
-GEMINI_MODEL = "gemini-1.5-flash"
+GEMINI_MODEL = "gemini-2.0-flash-lite"
 GEMINI_MAX_RETRIES = 3
 GEMINI_RETRY_DELAY = 5   # seconds between retries on rate limit
