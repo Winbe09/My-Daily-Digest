@@ -104,14 +104,7 @@ NEWSLETTER_SOURCES = [
 # TRENDING SIGNAL SOURCES
 # Used only for scoring enrichment — not as direct article sources
 # -----------------------------------------------------------------------------
-REDDIT_SUBREDDITS = [
-    "technology",
-    "worldnews",
-    "investing",
-    "artificial",
-    "geopolitics",
-    "IndiaInvestments",
-]
+REDDIT_SUBREDDITS = []
 
 # Hacker News: top N stories fetched
 HN_STORY_LIMIT = 30
@@ -147,6 +140,6 @@ INDEX_FILENAME  = "index.html"
 # -----------------------------------------------------------------------------
 # AI MODEL
 # -----------------------------------------------------------------------------
-GEMINI_MODEL = "gemini-2.0-flash-lite"
+GEMINI_MODEL = "gemini-2.0-flash"
 GEMINI_MAX_RETRIES = 3
 GEMINI_RETRY_DELAY = 5   # seconds between retries on rate limit
