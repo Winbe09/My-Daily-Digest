@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KritiDigest — Friday, May 1, 2026</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Georgia', serif; background: #F4F6FA; color: #1A1A2E; }
+
+header {
+  background: linear-gradient(135deg, #0F3D91 0%, #1A1A2E 100%);
+  color: white; padding: 28px 32px 22px;
+}
+.header-top { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 10px; }
+.digest-title { font-size: 28px; font-weight: 700; letter-spacing: -0.5px; font-family: Arial, sans-serif; }
+.digest-subtitle { font-size: 13px; color: #A8C4F0; margin-top: 3px; font-family: Arial, sans-serif; }
+.header-meta { text-align: right; font-family: Arial, sans-serif; }
+.header-date { font-size: 13px; color: #A8C4F0; }
+.header-count { font-size: 12px; color: #7AAAE8; margin-top: 2px; }
+
+.glance { background: rgba(255,255,255,0.1); border-left: 3px solid #5BA3FF; margin-top: 18px; padding: 12px 16px; border-radius: 4px; }
+.glance-label { font-size: 10px; font-weight: 700; letter-spacing: 1.5px; color: #5BA3FF; text-transform: uppercase; font-family: Arial, sans-serif; margin-bottom: 8px; }
+.glance-list { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+.glance-list li { font-size: 13px; line-height: 1.5; color: #D8E8FF; font-family: Arial, sans-serif; padding-left: 14px; position: relative; }
+.glance-list li::before { content: '–'; position: absolute; left: 0; color: #5BA3FF; font-weight: 700; }
+
+main { max-width: 960px; margin: 0 auto; padding: 28px 16px 60px; }
+
+.big-section { margin: 36px 0 20px; padding: 14px 20px; border-radius: 8px; display: flex; align-items: baseline; gap: 10px; }
+.big-section.news    { background: #E8EDF8; border-left: 4px solid #0F3D91; }
+.big-section.culture { background: #FDF3E8; border-left: 4px solid #C06000; }
+.big-section.thought { background: #EAF4EE; border-left: 4px solid #1A7A40; }
+.big-section-num   { font-size: 11px; font-weight: 700; font-family: Arial, sans-serif; opacity: 0.5; }
+.big-section-title { font-size: 15px; font-weight: 700; font-family: Arial, sans-serif; }
+.big-section.news    .big-section-title { color: #0F3D91; }
+.big-section.culture .big-section-title { color: #8B4500; }
+.big-section.thought .big-section-title { color: #1A7A40; }
+.big-section-desc  { font-size: 12px; font-family: Arial, sans-serif; color: #666; margin-left: auto; font-style: italic; }
+@media (max-width: 600px) { .big-section-desc { display: none; } }
+
+.section-header { display: flex; align-items: center; gap: 10px; margin: 24px 0 12px; }
+.section-icon  { font-size: 15px; }
+.section-title { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #666; font-family: Arial, sans-serif; }
+.section-line  { flex: 1; height: 1px; background: #D8DFF0; }
+
+.card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+@media (max-width: 700px) { .card-grid { grid-template-columns: 1fr; } }
+
+.card { background: white; border-radius: 8px; padding: 16px 18px; box-shadow: 0 1px 4px rgba(0,0,0,0.07); border: 1px solid #E4EAF6; display: flex; flex-direction: column; gap: 8px; transition: box-shadow 0.15s; }
+.card:hover { box-shadow: 0 4px 14px rgba(15,61,145,0.1); }
+.card.culture-card  { border-color: #F0DEC8; }
+.card.culture-card:hover { box-shadow: 0 4px 14px rgba(192,96,0,0.1); }
+.card.thought-card  { border-color: #C8E8D0; background: #FAFFFE; }
+.card.thought-card:hover { box-shadow: 0 4px 14px rgba(26,122,64,0.1); }
+
+.card-top    { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; }
+.card-badges { display: flex; gap: 5px; flex-wrap: wrap; flex-shrink: 0; }
+
+.badge { font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 10px; font-family: Arial, sans-serif; letter-spacing: 0.3px; white-space: nowrap; }
+.badge-source   { background: #E8EDF8; color: #0F3D91; }
+.badge-culture  { background: #FDEBD0; color: #8B4500; }
+.badge-thought  { background: #D8F0E0; color: #1A7A40; }
+.badge-trending { background: #FFF0E0; color: #D4700A; }
+.badge-score-high { background: #E6F7EE; color: #1A7A40; }
+.badge-score-mid  { background: #FFF8E1; color: #9A6B00; }
+
+.card-headline { font-size: 14.5px; font-weight: 700; line-height: 1.4; font-family: Arial, sans-serif; color: #1A1A2E; text-decoration: none; display: block; }
+.card-headline:hover { color: #0F3D91; text-decoration: underline; }
+.thought-card .card-headline:hover { color: #1A7A40; }
+.culture-card .card-headline:hover { color: #8B4500; }
+
+.card-summary { font-size: 12.5px; line-height: 1.6; color: #444466; font-family: Arial, sans-serif; }
+
+.card-footer { display: flex; align-items: center; margin-top: 4px; padding-top: 8px; border-top: 1px solid #F0F4FF; }
+.thought-card .card-footer { border-top-color: #D8F0E0; }
+.culture-card .card-footer { border-top-color: #F5E8D8; }
+.card-also { font-size: 10.5px; color: #8899BB; font-family: Arial, sans-serif; font-style: italic; }
+
+.card.featured { grid-column: 1 / -1; flex-direction: row; gap: 20px; background: linear-gradient(135deg, #F0F5FF 0%, #FAFBFF 100%); border: 1px solid #C0CFEE; }
+.featured-body { flex: 1; display: flex; flex-direction: column; gap: 8px; }
+.featured-label { font-size: 10px; font-weight: 700; letter-spacing: 1.5px; color: #0F3D91; text-transform: uppercase; font-family: Arial, sans-serif; }
+.card.featured .card-headline { font-size: 17px; }
+.card.featured .card-summary  { font-size: 13px; }
+
+.card.thought-featured { grid-column: 1 / -1; flex-direction: row; gap: 20px; background: linear-gradient(135deg, #EAF7EE 0%, #F8FFFA 100%); border: 1px solid #A8DABC; }
+.thought-featured .featured-label { color: #1A7A40; }
+.thought-featured .card-headline  { font-size: 17px; }
+.thought-featured .card-headline:hover { color: #1A7A40; }
+.thought-featured .card-footer { border-top-color: #C8E8D0; }
+
+@media (max-width: 700px) { .card.featured, .card.thought-featured { flex-direction: column; } }
+
+.big-divider { border: none; border-top: 2px dashed #D0D8EE; margin: 44px 0 0; }
+
+.archive-bar { text-align: center; margin-top: 48px; padding-top: 24px; border-top: 1px solid #D8E0F0; font-family: Arial, sans-serif; }
+.archive-bar a { font-size: 12px; color: #0F3D91; text-decoration: none; }
+.archive-bar a:hover { text-decoration: underline; }
+.archive-bar span { color: #AAB8D8; margin: 0 8px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-top">
+    <div>
+      <div class="digest-title">KritiDigest</div>
+      <div class="digest-subtitle">Your personalised AI news briefing</div>
+    </div>
+    <div class="header-meta">
+      <div class="header-date">Friday, May 1, 2026</div>
+      <div class="header-count">25 articles · 4 sources · 0 trending</div>
+    </div>
+  </div>
+  <div class="glance">
+    <div class="glance-label">Today at a Glance</div>
+    <ul class="glance-list">
+      <li>Regional market fit for generative AI tools varies significantly, emphasizing the need for nuanced GTM strategies and market segmentation based on user behavior.</li>
+      <li>AI-specific workloads are driving substantial demand for high-performance hardware, highlighting a growing need for robust computing infrastructure within the professional and developer ecosystem that devtools must address.</li>
+      <li>Leading AI companies are adopting restricted, specialized GTM strategies for critical enterprise AI applications, signaling a trend towards targeted rollouts for high-value solutions.</li>
+      <li>Strategic dependencies and intellectual property challenges in foundational model training underscore the critical need for differentiation and robust IP protection across the AI and devtools landscape.</li>
+    </ul>
+  </div>
+</header>
+
+<main>
+
+  <div class="big-section news">
+    <span class="big-section-num">01</span>
+    <span class="big-section-title">What's Happening</span>
+    <span class="big-section-desc">News · Geopolitics · Business · Tech</span>
+  </div>
+
+  <div class="section-header">
+    <span class="section-icon">🌍</span>
+    <span class="section-title">Geopolitics</span>
+    <div class="section-line"></div>
+  </div>
+  <div class="card-grid">
+    <div class="card featured ">
+      <div class="featured-body">
+        <div class="featured-label" style="color:#0F3D91;">Top Story</div>
+        <div class="card-top">
+          <a href="https://techcrunch.com/2026/04/30/apple-was-surprised-by-ai-driven-demand-for-macs/" class="card-headline" target="_blank" rel="noopener" style="">Apple was surprised by AI-driven demand for Macs</a>
+          <div class="card-badges"><span class="badge badge-source">TechCrunch</span> <span class="badge badge-score-high">9</span></div>
+        </div>
+        <div class="card-summary">Apple has been surprised by a significant surge in demand for its Mac products, including Mac mini, Studio, and Neo, driven specifically by AI-related use cases, leading to anticipated supply constraints. For an AI GTM strategy leader, this indicates a tangible market shift where AI is directly influencing hardware adoption and highlights the increasing need for high-performance computing in the professional and developer ecosystem.</div>
+        <div class="card-footer"></div>
+      </div>
+    </div>
+    <div class="card ">
+      <div class="card-top">
+        <a href="https://techcrunch.com/2026/04/30/after-dissing-anthropic-for-limiting-mythos-openai-restricts-access-to-cyber-too/" class="card-headline" target="_blank" rel="noopener">After dissing Anthropic for limiting Mythos, OpenAI restricts access to Cyber, too</a>
+        <div class="card-badges"><span class="badge badge-source">TechCrunch</span> <span class="badge badge-score-high">9</span></div>
+      </div>
+      <div class="card-summary">OpenAI is launching its new cybersecurity AI tool, GPT-5.5 Cyber, with an initial restricted rollout to &#x27;critical cyber defenders,&#x27; mirroring a similar limited release strategy previously employed by Anthropic. This development offers insights into the evolving product launch and GTM strategies of leading AI companies, relevant for understanding competitive dynamics and specialized AI application trends in the enterprise software space.</div>
+      <div class="card-footer"></div>
+    </div>
+    <div class="card ">
+      <div class="card-top">
+        <a href="https://techcrunch.com/2026/04/30/salesforce-is-crowdsourcing-its-ai-roadmap-with-customers/" class="card-headline" target="_blank" rel="noopener">Salesforce is crowdsourcing its AI roadmap — with customers</a>
+        <div class="card-badges"><span class="badge badge-source">TechCrunch</span> <span class="badge badge-score-high">9</span></div>
+      </div>
+      <div class="card-summary">Salesforce is adopting a customer-led approach to define its AI product roadmap, believing that shared enterprise customer problems indicate broader market needs. This strategy provides insights into how a major enterprise software player is driving its AI product development, which is pertinent for your role in AI GTM strategy within the devtools ecosystem.</div>
+      <div class="card-footer"></div>
+    </div>
+    <div class="card ">
+      <div class="card-top">
+        <a href="https://www.theguardian.com/business/2026/may/01/iran-war-may-cause-food-shortages-in-africa-world-largest-fertiliser-firm-yara-says" class="card-headline" target="_blank" rel="noopener">Iran war may cause food shortages in Africa, world’s largest fertiliser firm says</a>
+        <div class="card-badges"><span class="badge badge-source">The Guardian</span> <span class="badge badge-score-high">9</span></div>
+      </div>
+      <div class="card-summary">This article highlights how potential escalation in the Middle East, specifically involving Iran, could trigger severe global food shortages and price inflation, particularly impacting vulnerable African economies. The CEO of the world&#x27;s largest fertilizer firm warns of a &#x27;global auction&#x27; for supplies, underscoring significant geopolitical and macroeconomic risks that could influence global supply chains and market stability for any enterprise.</div>
+      <div class="card-footer"></div>
+    </div>
+    <div class="card ">
+      <div class="card-top">
+        <a href="https://www.theguardian.com/technology/2026/apr/30/palantir-manifesto-australia-government-contracts" class="card-headline" target="_blank" rel="noopener">Calls grow to ban Palantir in Australia after manifesto described by UK MP as ‘ramblings of a supervillain’</a>
+        <div class="card-badges"><span class="badge badge-source">The Guardian</span> <span class="badge badge-score-high">9</span></div>
+      </div>
+      <div class="card-summary">The article details growing pressure in Australia to ban government contracts with Palantir, a leading AI/data analytics firm, following outrage over a company manifesto described as &#x27;supervillain-like&#x27; and past comments on cultural superiority. This case study highlights critical GTM challenges, ethical considerations, and reputational risks for tech companies, particularly those operating in sensitive government sectors, and managing public perception of their culture and technology.</div>
+      <div class="card-footer"></div>
+    </div>
+    <div class="card ">
+      <div class="card-top">
+        <a href="https://www.theguardian.com/world/live/2026/may/01/donald-trump-us-troops-italy-spain-germany-nato-europe-latest-news" class="card-headline" target="_blank" rel="noopener">Trump threatens to withdraw US troops from Italy and Spain – Europe live</a>
+        <div class="card-badges"><span class="badge badge-source">The Guardian</span> <span class="badge badge-score-high">9</span></div>
+      </div>
+      <div class="card-summary">Former US President Trump is threatening to review and potentially withdraw US troops from European countries like Italy and Spain, stemming from criticism over US foreign policy in the Middle East. This signals potential shifts in transatlantic alliances and European security structures, which could have significant implications for global stability and the broader international business landscape.</div>
+      <div class="card-footer"></div>
+    </div>
+    <div class="card ">
+      <div class="card-top">
+        <a href="https://www.theguardian.com/world/2026/apr/30/oil-price-news-highest-since-2022-us-iran-ceasefire-strait-of-hormuz" class="card-headline" target="_blank" rel="noopener">Oil price tops $126 a barrel after Trump warns Iran blockade could last ‘months’</a>
+        <div class="card-badges"><span class="badge badge-source">The Guardian</span> <span class="badge badge-score-high">9</span></div>
+      </div>
+      <div class="card-summary">This article highlights global oil prices surging to $126 a barrel due to former President Trump&#x27;s warnings of a prolonged US blockade against Iran, intensifying geopolitical tensions. For a strategy professional, this underscores how international relations directly influence global markets and macroeconomic stability, impacting broader business conditions and enterprise spending.</div>
+      <div class="card-footer"></div>
+    </div>
+    <div class="card ">
+      <div class="card-top">
+        <a href="https://www.theguardian.com/world/2026/apr/30/iran-supreme-leader-issues-defiant-statement-on-strait-of-hormuz" class="card-headline" target="_blank" rel="noopener">Iran supreme leader issues defiant statement on strait of Hormuz</a>
+        <div class="card-badges"><span class="badge badge-source">The Guardian</span> <span class="badge badge-score-high">9</span></div>
+      </div>
+      <div class="card-summary">Iran&#x27;s supreme leader has issued a defiant statement reasserting control over the Strait of Hormuz, a vital global shipping chokepoint. This signals escalating geopolitical tensions in a key region, potentially impacting global supply chains, energy prices, and the broader macroeconomic stability that informs market conditions for devtools and AI GTM strategies.</div>
+      <div class="card-footer"></div>
+    </div>
+    <div class="card ">
+      <div class="card-top">
+        <a href="https://economictimes.indiatimes.com/markets/commodities/news/gold-falls-around-2-in-one-week-as-skyrocketing-oil-prices-fuel-inflation-worries-what-lies-ahead/articleshow/130671067.cms" class="card-headline" target="_blank" rel="noopener">Gold falls around 2% in one week as skyrocketing oil prices fuel inflation worries. What lies ahead?</a>
+        <div class="card-badges"><span class="badge badge-source">Economic Times</span> <span class="badge badge-score-high">9</span></div>
+      </div>
+      <div class="card-summary">This article highlights immediate market volatility, with gold falling due to skyrocketing oil prices, inflation fears, and expectations of prolonged high interest rates, further exacerbated by the ongoing Iran-US conflict. For a strategy professional, understanding these macroeconomic and geopolitical shifts is crucial for anticipating market conditions and informing GTM strategies for a devtools company in an uncertain economic climate.</div>
+      <div class="card-footer"></div>
+    </div>
+    <div class="card ">
+      <div class="card-top">
+        <a href="https://timesofindia.indiatimes.com/world/middle-east/iran-leadership-crisis-pezeshkian-ghalibaf-seek-fm-araghchis-removal-for-subservience-to-irgc-over-president-report/articleshow/130671562.cms" class="card-headline" target="_blank" rel="noopener">Top Iranian leaders push to remove FM Abbas Araghchi over alleged allegiance to IRGC</a>
+        <div class="card-badges"><span class="badge badge-source">Times of India</span> <span class="badge badge-score-high">9</span></div>
+      </div>
+      <div class="card-summary">This article reports on heightened geopolitical tensions in the Middle East, with the U.S. deploying a substantial military presence including three aircraft carriers, signaling readiness for potential conflict with Iran amid a fragile ceasefire. For a strategy professional, understanding these critical developments is essential for anticipating global risks, market shifts, and potential impacts on international business operations.</div>
+      <div class="card-footer"></div>
+    </div>
+    <div class="card ">
+      <div class="card-top">
+        <a href="https://timesofindia.indiatimes.com/world/middle-east/continue-seeing-gaza-on-youtube-netanyahu-mocks-flotilla-as-israel-intercepts-more-than-20-ships-with-175-activists-draws-global-flak/articleshow/130669580.cms" class="card-headline" target="_blank" rel="noopener">&#x27;Continue seeing Gaza on YouTube&#x27;: Netanyahu mocks flotilla as 20 ships with 175 activists sent back</a>
+        <div class="card-badges"><span class="badge badge-source">Times of India</span> <span class="badge badge-score-high">9</span></div>
+      </div>
+      <div class="card-summary">The Israeli Navy successfully intercepted a Gaza-bound flotilla carrying activists near Crete, with all participants turned back. Prime Minister Netanyahu commended the operation, and the US State Department backed Israel&#x27;s actions, underscoring ongoing geopolitical tensions in the region. Such developments are relevant for understanding the broader global environment that can impact international business and market stability.</div>
+      <div class="card-footer"></div>
+    </div>
+    <div class="card ">
+      <div class="card-top">
+        <a href="https://timesofindia.indiatimes.com/world/us/trump-admin-claims-iran-ceasefire-terminated-hostilities-ahead-of-us-congress-60-day-deadline/articleshow/130669079.cms" class="card-headline" target="_blank" rel="noopener">Under US Congress deadline pressure, Trump admin claims Iran ceasefire &#x27;terminated&#x27; hostilities</a>
+        <div class="card-badges"><span class="badge badge-source">Times of India</span> <span class="badge badge-score-high">9</span></div>
+      </div>
+      <div class="card-summary">The article reports on the Trump administration&#x27;s assertion that the U.S. is no longer at war with Iran, claiming hostilities have &#x27;terminated&#x27; to avoid the War Powers Resolution&#x27;s 60-day deadline. This development offers insight into evolving international relations and potential shifts in geopolitical stability, which are crucial for a strategy professional to monitor for broader strategic context.</div>
+      <div class="card-footer"></div>
+    </div>
+    <div class="card ">
+      <div class="card-top">
+        <a href="https://techcrunch.com/2026/04/30/as-tim-cook-steps-down-apple-hit-record-sales-but-a-chip-shortage-looms/" class="card-headline" target="_blank" rel="noopener">As Tim Cook steps down, Apple hit record sales — but a chip shortage looms</a>
+        <div class="card-badges"><span class="badge badge-source">TechCrunch</span> <span class="badge badge-score-high">8</span></div>
+      </div>
+      <div class="card-summary">This article reports on Apple&#x27;s recent record sales achievements but warns of looming supply-chain headwinds, particularly a &#x27;RAMageddon&#x27; chip shortage, that could impact its future business performance. For a strategy professional, this highlights the critical importance of supply chain resilience and strategic component sourcing in the tech industry, directly influencing product roadmaps and Go-to-Market strategies.</div>
+      <div class="card-footer"></div>
+    </div>
+    <div class="card ">
+      <div class="card-top">
+        <a href="https://techcrunch.com/2026/04/30/openai-announces-new-advanced-security-for-chatgpt-accounts-including-a-partnership-with-yubico/" class="card-headline" target="_blank" rel="noopener">OpenAI announces new advanced security for ChatGPT accounts, including a partnership with Yubico</a>
+        <div class="card-badges"><span class="badge badge-source">TechCrunch</span> <span class="badge badge-score-high">8</span></div>
+      </div>
+      <div class="card-summary">OpenAI is launching additional, opt-in security protections for ChatGPT accounts, notably forming a partnership with security key provider Yubico. For an AI GTM leader, this move signifies the increasing focus on enterprise-grade security and trust in the AI product landscape, impacting user adoption and competitive positioning within the devtools and enterprise software ecosystem.</div>
+      <div class="card-footer"></div>
+    </div>
+  </div>
+  <div class="section-header">
+    <span class="section-icon">📈</span>
+    <span class="section-title">Business &amp; Markets</span>
+    <div class="section-line"></div>
+  </div>
+  <div class="card-grid">
+    <div class="card featured ">
+      <div class="featured-body">
+        <div class="featured-label" style="color:#0F3D91;">Top Story</div>
+        <div class="card-top">
+          <a href="https://techcrunch.com/2026/04/30/chatgpt-images-2-0-is-a-hit-in-india-but-not-a-big-winner-elsewhere-yet/" class="card-headline" target="_blank" rel="noopener" style="">ChatGPT Images 2.0 is a hit in India, but not a big winner elsewhere, yet</a>
+          <div class="card-badges"><span class="badge badge-source">TechCrunch</span> <span class="badge badge-score-high">9</span></div>
+        </div>
+        <div class="card-summary">ChatGPT Images 2.0 is demonstrating significant user adoption in India for creative personal visuals, from avatars to cinematic portraits, yet is not seeing comparable success in other global markets. This highlights critical regional differences in product-market fit and user behavior for AI imaging tools, offering valuable insights for future AI GTM strategies and understanding market segmentation.</div>
+        <div class="card-footer"></div>
+      </div>
+    </div>
+    <div class="card ">
+      <div class="card-top">
+        <a href="https://techcrunch.com/2026/04/30/elon-musk-testifies-that-xai-trained-grok-on-openai-models/" class="card-headline" target="_blank" rel="noopener">Elon Musk testifies that xAI trained Grok on OpenAI models</a>
+        <div class="card-badges"><span class="badge badge-source">TechCrunch</span> <span class="badge badge-score-high">9</span></div>
+      </div>
+      <div class="card-summary">Elon Musk&#x27;s testimony that xAI trained Grok on OpenAI models sheds light on key industry practices and strategic dependencies in AI development. For an AI GTM strategy leader, this underscores challenges around intellectual property, competitive differentiation, and the potential implications of model &#x27;distillation&#x27; as companies navigate the use and protection of foundational AI models in a rapidly evolving market.</div>
+      <div class="card-footer"></div>
+    </div>
+    <div class="card ">
+      <div class="card-top">
+        <a href="https://techcrunch.com/2026/04/30/stripe-link-digital-wallet-ai-agents-shopping/" class="card-headline" target="_blank" rel="noopener">Stripe introduces Link, a digital wallet that autonomous AI agents can use, too</a>
+        <div class="card-badges"><span class="badge badge-source">TechCrunch</span> <span class="badge badge-score-high">9</span></div>
+      </div>
+      <div class="card-summary">Stripe&#x27;s new &#x27;Link&#x27; digital wallet enables autonomous AI agents to securely conduct transactions across cards, banks, and subscriptions through defined approval flows. This development is key for understanding evolving payment infrastructure and monetization models within the AI ecosystem, directly informing potential GTM strategies for AI-powered devtools and enterprise solutions.</div>
+      <div class="card-footer"></div>
+    </div>
+    <div class="card ">
+      <div class="card-top">
+        <a href="https://techcrunch.com/2026/04/30/hackers-are-actively-exploiting-a-bug-in-cpanel-used-by-millions-of-websites/" class="card-headline" target="_blank" rel="noopener">Hackers are actively exploiting a bug in cPanel, used by millions of websites</a>
+        <div class="card-badges"><span class="badge badge-source">TechCrunch</span> <span class="badge badge-score-high">8</span></div>
+      </div>
+      <div class="card-summary">Hackers are actively exploiting a severe bug in cPanel, a fundamental web hosting control panel used by millions of websites, prompting web hosts to scramble for fixes. For a strategy professional in devtools, understanding such critical vulnerabilities in foundational infrastructure is important for assessing ecosystem stability and potential impacts on the market landscape.</div>
+      <div class="card-footer"></div>
+    </div>
+    <div class="card ">
+      <div class="card-top">
+        <a href="https://techcrunch.com/2026/04/30/googles-gemini-ai-assistant-is-hitting-the-road-in-millions-of-vehicles/" class="card-headline" target="_blank" rel="noopener">Google’s Gemini AI assistant is hitting the road in millions of vehicles</a>
+        <div class="card-badges"><span class="badge badge-source">TechCrunch</span> <span class="badge badge-score-high">8</span></div>
+      </div>
+      <div class="card-summary">Google&#x27;s initiative to integrate its Gemini AI assistant into millions of vehicles represents a key AI product trend, demonstrating the push for advanced conversational AI in new verticals. For an AI GTM strategy leader, this move offers valuable insights into how major tech players are expanding their AI offerings and shaping market adoption in diverse industries beyond core tech.</div>
+      <div class="card-footer"></div>
+    </div>
+  </div>
+  <div class="section-header">
+    <span class="section-icon">⚡</span>
+    <span class="section-title">Tech Trends</span>
+    <div class="section-line"></div>
+  </div>
+  <div class="card-grid">
+    <div class="card featured ">
+      <div class="featured-body">
+        <div class="featured-label" style="color:#0F3D91;">Top Story</div>
+        <div class="card-top">
+          <a href="https://techcrunch.com/2026/04/30/uber-taps-hertz-to-clean-charge-and-fix-its-lucid-motors-robotaxis/" class="card-headline" target="_blank" rel="noopener" style="">Uber taps Hertz to clean, charge, and fix its Lucid Motors robotaxis</a>
+          <div class="card-badges"><span class="badge badge-source">TechCrunch</span> <span class="badge badge-score-high">8</span></div>
+        </div>
+        <div class="card-summary">This article highlights Uber&#x27;s strategic move to partner with Hertz for the operational management of its Lucid Motors robotaxi fleet, involving Hertz&#x27;s new &#x27;Oro Mobility&#x27; subsidiary for comprehensive fleet services. For an AI GTM leader, this demonstrates how major players are forming strategic partnerships and creating new business models to scale AI-powered autonomous services and address the operational challenges of deploying advanced tech in the mobility sector.</div>
+        <div class="card-footer"></div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="big-divider">
+  <div class="big-section culture">
+    <span class="big-section-num">02</span>
+    <span class="big-section-title">Art, Culture &amp; Lifestyle</span>
+    <span class="big-section-desc">Entertainment · Arts · Living</span>
+  </div>
+  
+  <div class="section-header">
+    <span class="section-icon">🎨</span>
+    <span class="section-title">Entertainment &amp; Arts</span>
+    <div class="section-line"></div>
+  </div>
+  <div class="card-grid">
+    <div class="card culture-card">
+      <div class="card-top">
+        <a href="https://www.theguardian.com/artanddesign/2026/apr/30/german-artist-georg-baselitz-dies" class="card-headline" target="_blank" rel="noopener">German artist Georg Baselitz dies aged 88</a>
+        <div class="card-badges"><span class="badge badge-culture">The Guardian</span> <span class="badge badge-score-high">7</span></div>
+      </div>
+      <div class="card-summary">The Guardian reports on the passing of Georg Baselitz, a prominent German contemporary artist celebrated for his expressive paintings and sculptures. Baselitz&#x27;s six-decade career was marked by his exploration of diverse techniques and often controversial works, ultimately earning him global acclaim and demonstrating the enduring impact of artistic innovation.</div>
+      <div class="card-footer"></div>
+    </div>
+    <div class="card culture-card">
+      <div class="card-top">
+        <a href="https://timesofindia.indiatimes.com/entertainment/hindi/bollywood/box-office/dhurandhar2-the-revenge-box-office-collection-day-43-ranveer-singh-starrer-is-all-set-to-become-the-second-highest-grossing-indian-movie-will-surpass-baahubali-2-global-total-this-weekend/articleshow/130662266.cms" class="card-headline" target="_blank" rel="noopener">Dhurandhar 2 box office day 43: Ranveer Singh starrer nears Baahubali 2 global mark</a>
+        <div class="card-badges"><span class="badge badge-culture">Times of India</span> <span class="badge badge-score-high">7</span></div>
+      </div>
+      <div class="card-summary">This article highlights the significant global box office success of Ranveer Singh&#x27;s film &#x27;Dhurandhar: The Revenge&#x27;, which is nearing the impressive earnings record of &#x27;Baahubali 2&#x27;. It details the film&#x27;s financial performance over six weeks, showcasing its strong audience engagement and commercial appeal, particularly within key regions like Maharashtra.</div>
+      <div class="card-footer"></div>
+    </div>
+    <div class="card culture-card">
+      <div class="card-top">
+        <a href="https://www.theguardian.com/us-news/2026/apr/30/oscar-missing-pavel-talankin-putin-documentary" class="card-headline" target="_blank" rel="noopener">Oscar belonging to co-director of Putin film missing after TSA makes him ship it</a>
+        <div class="card-badges"><span class="badge badge-culture">The Guardian</span> <span class="badge badge-score-mid">6</span></div>
+      </div>
+      <div class="card-summary">This article details the peculiar incident of an Oscar statuette belonging to Pavel Talankin, co-director of &#x27;Mr Nobody Against Putin,&#x27; going missing after TSA agents mandated it be shipped from New York. It provides a brief update on a specific cultural item with a tangential link to politically charged art, highlighting a personal experience rather than a broad industry trend.</div>
+      <div class="card-footer"></div>
+    </div></div>
+
+  <hr class="big-divider">
+  <div class="big-section thought">
+    <span class="big-section-num">03</span>
+    <span class="big-section-title">Thought Leadership &amp; Education</span>
+    <span class="big-section-desc">HBR · McKinsey · Longform · Strategy</span>
+  </div>
+  
+  <div class="section-header">
+    <span class="section-icon">🧠</span>
+    <span class="section-title">Strategy &amp; Leadership</span>
+    <div class="section-line"></div>
+  </div>
+  <div class="card-grid">
+    <div class="card thought-featured thought-card">
+      <div class="featured-body">
+        <div class="featured-label" style="color:#1A7A40;">Times of India</div>
+        <div class="card-top">
+          <a href="https://timesofindia.indiatimes.com/technology/tech-news/mark-cuban-to-engineers-use-these-three-claude-prompts-to-sharpen-your-skills/articleshow/130669076.cms" class="card-headline" target="_blank" rel="noopener" style="">American billionaire Mark Cuban to engineers: Use these 3 Claude prompts to sharpen your skills</a>
+          <div class="card-badges"><span class="badge badge-thought">Times of India</span> <span class="badge badge-score-high">8</span></div>
+        </div>
+        <div class="card-summary">Mark Cuban, a notable entrepreneur, encourages engineers to hone their AI skills using Claude, providing three specific prompts for developing practical business agents. The advice highlights opportunities for professionals to implement AI to achieve cost savings and improve efficiency, which is pertinent to your role in AI GTM strategy and understanding practical AI applications.</div>
+        <div class="card-footer"></div>
+      </div>
+    </div>
+    <div class="card thought-card">
+      <div class="card-top">
+        <a href="https://techcrunch.com/2026/04/30/fda-approval-fundraising-and-the-reality-of-building-in-healthcare-according-to-bioticsai-founder/" class="card-headline" target="_blank" rel="noopener">FDA approval, fundraising, and the reality of building in healthcare according to BioticsAI founder</a>
+        <div class="card-badges"><span class="badge badge-thought">TechCrunch</span> <span class="badge badge-score-mid">6</span></div>
+      </div>
+      <div class="card-summary">This piece shares strategic insights from BioticsAI&#x27;s CEO on the realities of building an AI company in a highly regulated sector like healthcare, specifically detailing challenges like FDA approval and maintaining team motivation amidst bureaucracy. It offers valuable perspectives on operational strategy and leadership in complex environments, which can be transferable despite the healthcare-specific context.</div>
+      <div class="card-footer"></div>
+    </div></div>
+
+  <div class="archive-bar">
+    <a href="2026-04-30.html">← 2026-04-30</a>
+    <span>|</span>
+    <a href="index.html">All digests</a>
+    <span>|</span>
+    <span style="color:#ccc;">Next →</span>
+  </div>
+
+</main>
+</body>
+</html>
