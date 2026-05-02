@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KritiDigest — Saturday, May 2, 2026</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Georgia', serif; background: #F4F6FA; color: #1A1A2E; }
+
+header {
+  background: linear-gradient(135deg, #0F3D91 0%, #1A1A2E 100%);
+  color: white; padding: 28px 32px 22px;
+}
+.header-top { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 10px; }
+.digest-title { font-size: 28px; font-weight: 700; letter-spacing: -0.5px; font-family: Arial, sans-serif; }
+.digest-subtitle { font-size: 13px; color: #A8C4F0; margin-top: 3px; font-family: Arial, sans-serif; }
+.header-meta { text-align: right; font-family: Arial, sans-serif; }
+.header-date { font-size: 13px; color: #A8C4F0; }
+.header-count { font-size: 12px; color: #7AAAE8; margin-top: 2px; }
+
+.glance { background: rgba(255,255,255,0.1); border-left: 3px solid #5BA3FF; margin-top: 18px; padding: 12px 16px; border-radius: 4px; }
+.glance-label { font-size: 10px; font-weight: 700; letter-spacing: 1.5px; color: #5BA3FF; text-transform: uppercase; font-family: Arial, sans-serif; margin-bottom: 8px; }
+.glance-list { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+.glance-list li { font-size: 13px; line-height: 1.5; color: #D8E8FF; font-family: Arial, sans-serif; padding-left: 14px; position: relative; }
+.glance-list li::before { content: '–'; position: absolute; left: 0; color: #5BA3FF; font-weight: 700; }
+
+main { max-width: 960px; margin: 0 auto; padding: 28px 16px 60px; }
+
+.big-section { margin: 36px 0 20px; padding: 14px 20px; border-radius: 8px; display: flex; align-items: baseline; gap: 10px; }
+.big-section.news    { background: #E8EDF8; border-left: 4px solid #0F3D91; }
+.big-section.culture { background: #FDF3E8; border-left: 4px solid #C06000; }
+.big-section.thought { background: #EAF4EE; border-left: 4px solid #1A7A40; }
+.big-section-num   { font-size: 11px; font-weight: 700; font-family: Arial, sans-serif; opacity: 0.5; }
+.big-section-title { font-size: 15px; font-weight: 700; font-family: Arial, sans-serif; }
+.big-section.news    .big-section-title { color: #0F3D91; }
+.big-section.culture .big-section-title { color: #8B4500; }
+.big-section.thought .big-section-title { color: #1A7A40; }
+.big-section-desc  { font-size: 12px; font-family: Arial, sans-serif; color: #666; margin-left: auto; font-style: italic; }
+@media (max-width: 600px) { .big-section-desc { display: none; } }
+
+.section-header { display: flex; align-items: center; gap: 10px; margin: 24px 0 12px; }
+.section-icon  { font-size: 15px; }
+.section-title { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #666; font-family: Arial, sans-serif; }
+.section-line  { flex: 1; height: 1px; background: #D8DFF0; }
+
+.card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+@media (max-width: 700px) { .card-grid { grid-template-columns: 1fr; } }
+
+.card { background: white; border-radius: 8px; padding: 16px 18px; box-shadow: 0 1px 4px rgba(0,0,0,0.07); border: 1px solid #E4EAF6; display: flex; flex-direction: column; gap: 8px; transition: box-shadow 0.15s; }
+.card:hover { box-shadow: 0 4px 14px rgba(15,61,145,0.1); }
+.card.culture-card  { border-color: #F0DEC8; }
+.card.culture-card:hover { box-shadow: 0 4px 14px rgba(192,96,0,0.1); }
+.card.thought-card  { border-color: #C8E8D0; background: #FAFFFE; }
+.card.thought-card:hover { box-shadow: 0 4px 14px rgba(26,122,64,0.1); }
+
+.card-top    { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; }
+.card-badges { display: flex; gap: 5px; flex-wrap: wrap; flex-shrink: 0; }
+
+.badge { font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 10px; font-family: Arial, sans-serif; letter-spacing: 0.3px; white-space: nowrap; }
+.badge-source   { background: #E8EDF8; color: #0F3D91; }
+.badge-culture  { background: #FDEBD0; color: #8B4500; }
+.badge-thought  { background: #D8F0E0; color: #1A7A40; }
+.badge-trending { background: #FFF0E0; color: #D4700A; }
+.badge-score-high { background: #E6F7EE; color: #1A7A40; }
+.badge-score-mid  { background: #FFF8E1; color: #9A6B00; }
+
+.card-headline { font-size: 14.5px; font-weight: 700; line-height: 1.4; font-family: Arial, sans-serif; color: #1A1A2E; text-decoration: none; display: block; }
+.card-headline:hover { color: #0F3D91; text-decoration: underline; }
+.thought-card .card-headline:hover { color: #1A7A40; }
+.culture-card .card-headline:hover { color: #8B4500; }
+
+.card-summary { font-size: 12.5px; line-height: 1.6; color: #444466; font-family: Arial, sans-serif; }
+
+.card-footer { display: flex; align-items: center; margin-top: 4px; padding-top: 8px; border-top: 1px solid #F0F4FF; }
+.thought-card .card-footer { border-top-color: #D8F0E0; }
+.culture-card .card-footer { border-top-color: #F5E8D8; }
+.card-also { font-size: 10.5px; color: #8899BB; font-family: Arial, sans-serif; font-style: italic; }
+
+.card.featured { grid-column: 1 / -1; flex-direction: row; gap: 20px; background: linear-gradient(135deg, #F0F5FF 0%, #FAFBFF 100%); border: 1px solid #C0CFEE; }
+.featured-body { flex: 1; display: flex; flex-direction: column; gap: 8px; }
+.featured-label { font-size: 10px; font-weight: 700; letter-spacing: 1.5px; color: #0F3D91; text-transform: uppercase; font-family: Arial, sans-serif; }
+.card.featured .card-headline { font-size: 17px; }
+.card.featured .card-summary  { font-size: 13px; }
+
+.card.thought-featured { grid-column: 1 / -1; flex-direction: row; gap: 20px; background: linear-gradient(135deg, #EAF7EE 0%, #F8FFFA 100%); border: 1px solid #A8DABC; }
+.thought-featured .featured-label { color: #1A7A40; }
+.thought-featured .card-headline  { font-size: 17px; }
+.thought-featured .card-headline:hover { color: #1A7A40; }
+.thought-featured .card-footer { border-top-color: #C8E8D0; }
+
+@media (max-width: 700px) { .card.featured, .card.thought-featured { flex-direction: column; } }
+
+.big-divider { border: none; border-top: 2px dashed #D0D8EE; margin: 44px 0 0; }
+
+.archive-bar { text-align: center; margin-top: 48px; padding-top: 24px; border-top: 1px solid #D8E0F0; font-family: Arial, sans-serif; }
+.archive-bar a { font-size: 12px; color: #0F3D91; text-decoration: none; }
+.archive-bar a:hover { text-decoration: underline; }
+.archive-bar span { color: #AAB8D8; margin: 0 8px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-top">
+    <div>
+      <div class="digest-title">KritiDigest</div>
+      <div class="digest-subtitle">Your personalised AI news briefing</div>
+    </div>
+    <div class="header-meta">
+      <div class="header-date">Saturday, May 2, 2026</div>
+      <div class="header-count">23 articles · 4 sources · 0 trending</div>
+    </div>
+  </div>
+  <div class="glance">
+    <div class="glance-label">Today at a Glance</div>
+    <ul class="glance-list">
+      <li>Uber is leveraging its operational footprint to monetize driver data as a sensor grid for AV development, revealing a new strategic model for AI data generation and asset utilization.</li>
+      <li>The AI devtools market continues its rapid consolidation and high-valuation M&amp;A activity, exemplified by Cursor&#x27;s $60B acquisition talks, influencing competitive positioning and partnership strategies.</li>
+      <li>Major tech players like Meta are making strategic acquisitions in robotics to accelerate their humanoid AI ambitions, signaling a significant future growth vector for devtools supporting embodied AI.</li>
+      <li>The Pentagon&#x27;s new deals with Nvidia, Microsoft, and AWS for secure AI deployment on classified networks underscore a diversified, high-stakes enterprise demand for AI solutions and critical vendor ecosystem considerations.</li>
+    </ul>
+  </div>
+</header>
+
+<main>
+
+  <div class="big-section news">
+    <span class="big-section-num">01</span>
+    <span class="big-section-title">What's Happening</span>
+    <span class="big-section-desc">News · Geopolitics · Business · Tech</span>
+  </div>
+
+  <div class="section-header">
+    <span class="section-icon">🌍</span>
+    <span class="section-title">Geopolitics</span>
+    <div class="section-line"></div>
+  </div>
+  <div class="card-grid">
+    <div class="card featured ">
+      <div class="featured-body">
+        <div class="featured-label" style="color:#0F3D91;">Top Story</div>
+        <div class="card-top">
+          <a href="https://www.theguardian.com/us-news/2026/may/01/trump-threatens-withdraw-troops-italy-spain-strait-hormuz" class="card-headline" target="_blank" rel="noopener" style="">US withdrawing 5,000 troops from Germany after Merz says US ‘humiliated’ by Iran</a>
+          <div class="card-badges"><span class="badge badge-source">The Guardian</span> <span class="badge badge-score-high">9</span></div>
+        </div>
+        <div class="card-summary">This article reports on the US plan to withdraw 5,000 troops from Germany, a move stemming from escalating diplomatic friction over European support for operations in the Strait of Hormuz. For a strategy professional, this highlights a significant realignment in international alliances and defense strategies, with potential implications for global economic stability and market dynamics. The shift in US-European relations could influence future international business environments and the broader geopolitical landscape relevant to strategic planning.</div>
+        <div class="card-footer"></div>
+      </div>
+    </div>
+    <div class="card ">
+      <div class="card-top">
+        <a href="https://www.theguardian.com/us-news/2026/may/01/trump-tears-up-eu-tariff-deal-raises-import-duties-europe" class="card-headline" target="_blank" rel="noopener">Trump tears up part of EU tariff deal to raise import duties on cars and lorries</a>
+        <div class="card-badges"><span class="badge badge-source">The Guardian</span> <span class="badge badge-score-high">9</span></div>
+      </div>
+      <div class="card-summary">The US president has announced plans to terminate a portion of an existing tariff deal with the EU, intending to raise import duties on cars and lorries to 25%. This development signals a major shift in US-EU trade relations, with direct implications for global markets, supply chains, and the strategic planning for international businesses.</div>
+      <div class="card-footer"></div>
+    </div>
+    <div class="card ">
+      <div class="card-top">
+        <a href="https://www.theguardian.com/world/live/2026/may/01/donald-trump-us-troops-italy-spain-germany-nato-europe-latest-news" class="card-headline" target="_blank" rel="noopener">Trump threatens to withdraw US troops from Italy and Spain – as it happened</a>
+        <div class="card-badges"><span class="badge badge-source">The Guardian</span> <span class="badge badge-score-high">9</span></div>
+      </div>
+      <div class="card-summary">This article reports on a significant geopolitical development: the former US President&#x27;s threat to review and potentially withdraw US troops from Italy and Spain. This potential shift in military presence in Europe is framed in the context of public criticism regarding US-Israeli actions in Iran, indicating a major pivot in international relations and alliances that a strategy professional should monitor for its broader global stability implications.</div>
+      <div class="card-footer"></div>
+    </div>
+    <div class="card ">
+      <div class="card-top">
+        <a href="https://www.theguardian.com/world/2026/may/01/trump-iran-war-hostilities-letter" class="card-headline" target="_blank" rel="noopener">Trump claims hostilities have ended in Iran in letter to congressional leaders</a>
+        <div class="card-badges"><span class="badge badge-source">The Guardian</span> <span class="badge badge-score-high">9</span></div>
+      </div>
+      <div class="card-summary">The article reports on a letter from Donald Trump to congressional leaders stating that hostilities with Iran have &#x27;terminated,&#x27; potentially affecting legislative deadlines for war approval. For a strategy professional, this signals a potential de-escalation in a critical geopolitical region, which could influence global stability, energy markets, and international business strategy.</div>
+      <div class="card-footer"></div>
+    </div>
+    <div class="card ">
+      <div class="card-top">
+        <a href="https://www.theguardian.com/us-news/live/2026/may/01/us-war-iran-ceasefire-war-powers-oil-latest-news-updates" class="card-headline" target="_blank" rel="noopener">‘That’s bullshit’: Democrats slam Trump’s claims that Iran hostilities ‘have been terminated’ – as it happened</a>
+        <div class="card-badges"><span class="badge badge-source">The Guardian</span> <span class="badge badge-score-high">9</span></div>
+      </div>
+      <div class="card-summary">This article recaps the diplomatic exchanges concerning US-Iran relations, highlighting former President Trump&#x27;s assertions about terminated hostilities and Iran&#x27;s subsequent peace proposals. Understanding the nuances of such geopolitical developments is key for a strategy professional assessing global stability and potential macroeconomic shifts.</div>
+      <div class="card-footer"></div>
+    </div>
+    <div class="card ">
+      <div class="card-top">
+        <a href="https://timesofindia.indiatimes.com/defence/international/israel-sends-uae-laser-weapon-called-iron-beam-what-it-means-in-face-of-iranian-drones-and-why-is-it-important/articleshow/130709133.cms" class="card-headline" target="_blank" rel="noopener">Israel sends UAE laser weapon called ‘Iron Beam’ - What it means in face of Iranian drones</a>
+        <div class="card-badges"><span class="badge badge-source">Times of India</span> <span class="badge badge-score-high">9</span></div>
+      </div>
+      <div class="card-summary">Israel has reportedly deployed its advanced &#x27;Iron Beam&#x27; laser defense system and surveillance tech to the UAE, marking a significant step in defense cooperation and countering Iranian threats. This development underscores escalating geopolitical tensions and the integration of cutting-edge technology in strategic regional alliances, relevant for understanding global stability and advanced tech applications.</div>
+      <div class="card-footer"></div>
+    </div>
+    <div class="card ">
+      <div class="card-top">
+        <a href="https://timesofindia.indiatimes.com/technology/tech-news/impressed-by-claude-snap-ceo-evan-spiegel-predicts-people-are-going-to-pull-away-resources-from-software-engineering-to-/articleshow/130707918.cms" class="card-headline" target="_blank" rel="noopener">Impressed by Claude, Snap CEO predicts: People will pull away resources from software engineering</a>
+        <div class="card-badges"><span class="badge badge-source">Times of India</span> <span class="badge badge-score-high">9</span></div>
+      </div>
+      <div class="card-summary">Snap CEO Evan Spiegel predicts a strategic shift where companies will reallocate resources from software engineering to distribution as AI automates coding, a critical insight for your AI GTM strategy. This observation, backed by Snap&#x27;s experience with AI writing over two-thirds of its new code, highlights the profound impact AI is having on software development processes and resource planning within the devtools ecosystem.</div>
+      <div class="card-footer"></div>
+    </div>
+    <div class="card ">
+      <div class="card-top">
+        <a href="https://timesofindia.indiatimes.com/world/middle-east/iran-faces-growing-crisis-as-us-blockade-squeezes-hormuz-losses-hit-4-8bn/articleshow/130709737.cms" class="card-headline" target="_blank" rel="noopener">Iran faces growing crisis as US blockade squeezes Hormuz, losses hit $4.8bn</a>
+        <div class="card-badges"><span class="badge badge-source">Times of India</span> <span class="badge badge-score-high">9</span></div>
+      </div>
+      <div class="card-summary">The article details the escalating crisis in Iran as a US blockade impacts the Strait of Hormuz, leading to an estimated $4.8 billion in financial losses. For a strategy professional, this underscores critical geopolitical risks and their potential for macro-economic impact, influencing global trade and market stability, which are important considerations for long-term business and GTM planning.</div>
+      <div class="card-footer"></div>
+    </div>
+    <div class="card ">
+      <div class="card-top">
+        <a href="https://timesofindia.indiatimes.com/india/after-rahul-gandhis-attack-government-defends-great-nicobar-project/articleshow/130707914.cms" class="card-headline" target="_blank" rel="noopener">&#x27;Will strengthen presence in Andaman Sea &#x27;: After Rahul’s attack, govt defends Great Nicobar project</a>
+        <div class="card-badges"><span class="badge badge-source">Times of India</span> <span class="badge badge-score-high">9</span></div>
+      </div>
+      <div class="card-summary">This article reports on the Indian government&#x27;s defense of the Rs 81,000 crore Great Nicobar Project, emphasizing its strategic importance for bolstering India&#x27;s presence in the Andaman Sea and Southeast Asia. For a strategy professional, this provides insight into national-level infrastructure investment, its geopolitical drivers, and the strategic rationale behind large-scale government initiatives that impact regional influence.</div>
+      <div class="card-footer"></div>
+    </div>
+    <div class="card ">
+      <div class="card-top">
+        <a href="https://timesofindia.indiatimes.com/defence/international/middle-east-crisis-how-hezbollahs-low-cost-drones-are-reshaping-the-battlefield-as-israel-scrambles-to-adapt/articleshow/130709769.cms" class="card-headline" target="_blank" rel="noopener">How Hezbollah’s low-cost drones are reshaping the battlefield as Israel scrambles to adapt</a>
+        <div class="card-badges"><span class="badge badge-source">Times of India</span> <span class="badge badge-score-high">9</span></div>
+      </div>
+      <div class="card-summary">This article details how Hezbollah&#x27;s deployment of cheap, untraceable drones is reshaping the battlefield, presenting significant challenges for Israeli forces and forcing them to rapidly adapt their military tactics. For a strategy professional, this illustrates a powerful example of how low-cost, disruptive technology can create strategic asymmetries and compel incumbents to innovate and adapt quickly, mirroring challenges in the business and tech landscape.</div>
+      <div class="card-footer"></div>
+    </div>
+    <div class="card ">
+      <div class="card-top">
+        <a href="https://timesofindia.indiatimes.com/world/us/treasonous-trump-hits-critics-warns-iran-threat-could-have-destroyed-europe-middle-east/articleshow/130708827.cms" class="card-headline" target="_blank" rel="noopener">‘Treasonous’: Trump hits out at critics, warns Iran&#x27;s nuke&#x27;s could have destroyed Europe, Middle East</a>
+        <div class="card-badges"><span class="badge badge-source">Times of India</span> <span class="badge badge-score-high">9</span></div>
+      </div>
+      <div class="card-summary">This article details former President Trump&#x27;s recent strong remarks, labeling critics &#x27;treasonous&#x27; and emphasizing the potential destructive power of Iran&#x27;s nuclear program across Europe and the Middle East. For a strategy professional, understanding such high-stakes geopolitical rhetoric and international tensions is crucial for assessing global stability, identifying potential market disruptions, and informing long-term strategic planning in a complex international business environment.</div>
+      <div class="card-footer"></div>
+    </div>
+    <div class="card ">
+      <div class="card-top">
+        <a href="https://timesofindia.indiatimes.com/world/us/failure-to-provide-support-us-to-withdraw-5000-troops-from-germany-amid-widening-iran-war-rift/articleshow/130706655.cms" class="card-headline" target="_blank" rel="noopener">‘Failure to provide support’: US to withdraw 5k troops from Germany amid widening Iran war rift</a>
+        <div class="card-badges"><span class="badge badge-source">Times of India</span> <span class="badge badge-score-high">9</span></div>
+      </div>
+      <div class="card-summary">The US decision to withdraw 5,000 troops from Germany due to disagreements over Iran negotiations signals escalating tensions with European allies and a potential shift in long-standing geopolitical alliances. For a strategy professional, this highlights evolving international relations that could impact global stability and strategic partnerships.</div>
+      <div class="card-footer"></div>
+    </div>
+    <div class="card ">
+      <div class="card-top">
+        <a href="https://www.theguardian.com/global-development/2026/may/01/uganda-copying-russia-and-china-with-new-bill-designed-to-crush-dissent-say-critics" class="card-headline" target="_blank" rel="noopener">Uganda copying Russia and China with new bill designed to crush dissent, say critics</a>
+        <div class="card-badges"><span class="badge badge-source">The Guardian</span> <span class="badge badge-score-high">8</span></div>
+      </div>
+      <div class="card-summary">A new bill in Uganda, drawing comparisons to similar legislation in Russia and China, proposes harsh penalties including up to 20 years in prison for promoting &#x27;foreign interests&#x27; and restricts those working with overseas partners. For a strategy professional, this development is relevant for understanding evolving geopolitical landscapes and potential risks or shifts in operating environments for international businesses and collaborations in emerging markets.</div>
+      <div class="card-footer"></div>
+    </div>
+  </div>
+  <div class="section-header">
+    <span class="section-icon">📈</span>
+    <span class="section-title">Business &amp; Markets</span>
+    <div class="section-line"></div>
+  </div>
+  <div class="card-grid">
+    <div class="card featured ">
+      <div class="featured-body">
+        <div class="featured-label" style="color:#0F3D91;">Top Story</div>
+        <div class="card-top">
+          <a href="https://techcrunch.com/2026/05/01/replits-amjad-masad-on-the-cursor-deal-fighting-apple-and-why-hed-rather-not-sell/" class="card-headline" target="_blank" rel="noopener" style="">Replit’s Amjad Masad on the Cursor deal, fighting Apple, and why he’d rather not sell</a>
+          <div class="card-badges"><span class="badge badge-source">TechCrunch</span> <span class="badge badge-score-high">9</span></div>
+        </div>
+        <div class="card-summary">This article captures an interview with Replit CEO Amjad Masad, discussing significant industry shifts including competitor Cursor&#x27;s reported $60 billion acquisition talks with SpaceX. It delves into Replit&#x27;s strategic positioning within the AI devtools ecosystem, Masad&#x27;s views on competitive challenges with major players like Apple, and his leadership philosophy regarding potential acquisitions versus sustained independent growth, offering key insights for GTM strategy in the devtools space.</div>
+        <div class="card-footer"></div>
+      </div>
+    </div>
+    <div class="card ">
+      <div class="card-top">
+        <a href="https://techcrunch.com/2026/05/01/meta-buys-robotics-startup-to-bolster-its-humanoid-ai-ambitions/" class="card-headline" target="_blank" rel="noopener">Meta buys robotics startup to bolster its humanoid AI ambitions</a>
+        <div class="card-badges"><span class="badge badge-source">TechCrunch</span> <span class="badge badge-score-high">9</span></div>
+      </div>
+      <div class="card-summary">Meta&#x27;s acquisition of humanoid robotics startup Assured Robot Intelligence signifies a key strategic move to accelerate its AI ambitions in physical manifestations. For an AI GTM strategy leader, this highlights how major tech players are investing in critical underlying technology to &#x27;beef up&#x27; their AI models for robots, indicating future product directions and competitive landscape shifts in the AI and robotics space.</div>
+      <div class="card-footer"></div>
+    </div>
+    <div class="card ">
+      <div class="card-top">
+        <a href="https://economictimes.indiatimes.com/markets/us-stocks/news/jane-street-employees-set-to-get-2-68-million-payout-after-record-revenue-haul/articleshow/130711040.cms" class="card-headline" target="_blank" rel="noopener">Jane Street employees set to get $2.68 million payout after record revenue haul</a>
+        <div class="card-badges"><span class="badge badge-source">Economic Times</span> <span class="badge badge-score-high">9</span></div>
+      </div>
+      <div class="card-summary">Jane Street Group has achieved record trading revenue and compensation, dominating Wall Street. This success is attributed to its unconventional business structure, significant AI investments, and strong capital, demonstrating effective strategy and technology adoption in highly competitive markets. For a strategy professional, this offers insights into how AI drives growth and market leadership beyond the devtools sector.</div>
+      <div class="card-footer"></div>
+    </div>
+    <div class="card ">
+      <div class="card-top">
+        <a href="https://economictimes.indiatimes.com/markets/stocks/news/em-is-back-india-is-next-why-the-2025-underperformance-is-the-perfect-setup-for-a-2026-comeback/articleshow/130710971.cms" class="card-headline" target="_blank" rel="noopener">EM is back, India is next: Why the 2025 underperformance is the perfect setup for a 2026 comeback</a>
+        <div class="card-badges"><span class="badge badge-source">Economic Times</span> <span class="badge badge-score-high">9</span></div>
+      </div>
+      <div class="card-summary">This article discusses the underperformance of India&#x27;s market within Emerging Markets in 2025, attributing it to outflows and weaker earnings. It posits that this setup, combined with correcting valuations and strengthening domestic fundamentals like policy support and retail participation, positions India for a potential market rebound in 2026, offering key macroeconomic context for strategic decision-making.</div>
+      <div class="card-footer"></div>
+    </div>
+    <div class="card ">
+      <div class="card-top">
+        <a href="https://techcrunch.com/2026/05/01/coatue-has-a-plan-to-buy-up-land-for-data-centers-possibly-for-anthropic/" class="card-headline" target="_blank" rel="noopener">Coatue has a plan to buy up land for data centers, possibly for Anthropic</a>
+        <div class="card-badges"><span class="badge badge-source">TechCrunch</span> <span class="badge badge-score-high">8</span></div>
+      </div>
+      <div class="card-summary">Coatue, a major venture capital firm, is reportedly establishing a new venture to acquire land near power sources for building data centers, with speculation that these facilities could support large AI model providers like Anthropic. This development is crucial for understanding the strategic infrastructure investments underpinning the growth of the AI industry, offering insight into the scaling challenges and capacity expansion required for AI product development and deployment.</div>
+      <div class="card-footer"></div>
+    </div>
+  </div>
+  <div class="section-header">
+    <span class="section-icon">⚡</span>
+    <span class="section-title">Tech Trends</span>
+    <div class="section-line"></div>
+  </div>
+  <div class="card-grid">
+    <div class="card featured ">
+      <div class="featured-body">
+        <div class="featured-label" style="color:#0F3D91;">Top Story</div>
+        <div class="card-top">
+          <a href="https://techcrunch.com/2026/05/01/uber-wants-to-turn-its-millions-of-drivers-into-a-sensor-grid-for-self-driving-companies/" class="card-headline" target="_blank" rel="noopener" style="">Uber wants to turn its millions of drivers into a sensor grid for self-driving companies</a>
+          <div class="card-badges"><span class="badge badge-source">TechCrunch</span> <span class="badge badge-score-high">9</span></div>
+        </div>
+        <div class="card-summary">This article reveals Uber&#x27;s strategy to transform its millions of drivers into a valuable sensor network for self-driving technology companies through its new AV Labs program. This initiative represents a significant move to monetize Uber&#x27;s operational footprint by providing critical real-world data to advance autonomous vehicle development, offering insights into strategic asset utilization in the AI space.</div>
+        <div class="card-footer"></div>
+      </div>
+    </div>
+    <div class="card ">
+      <div class="card-top">
+        <a href="https://techcrunch.com/2026/05/01/pentagon-inks-deals-with-nvidia-microsoft-and-aws-to-deploy-ai-on-classified-networks/" class="card-headline" target="_blank" rel="noopener">Pentagon inks deals with Nvidia, Microsoft, and AWS to deploy AI on classified networks</a>
+        <div class="card-badges"><span class="badge badge-source">TechCrunch</span> <span class="badge badge-score-high">9</span></div>
+      </div>
+      <div class="card-summary">The Pentagon is accelerating the deployment of AI on classified networks through new deals with Nvidia, Microsoft, and AWS. This strategic move highlights a focus on diversifying AI vendors, stemming from a prior dispute with Anthropic over usage terms, and offers insights into large-scale, secure AI adoption within the public sector. For your role, it underscores evolving enterprise demand for high-stakes AI solutions and strategic considerations in vendor partnerships.</div>
+      <div class="card-footer"></div>
+    </div>
+  </div>
+
+  <hr class="big-divider">
+  <div class="big-section culture">
+    <span class="big-section-num">02</span>
+    <span class="big-section-title">Art, Culture &amp; Lifestyle</span>
+    <span class="big-section-desc">Entertainment · Arts · Living</span>
+  </div>
+  
+  <div class="section-header">
+    <span class="section-icon">🎨</span>
+    <span class="section-title">Entertainment &amp; Arts</span>
+    <div class="section-line"></div>
+  </div>
+  <div class="card-grid">
+    <div class="card culture-card">
+      <div class="card-top">
+        <a href="https://www.theguardian.com/culture/2026/may/01/gerry-conway-punisher-spider-man-comics" class="card-headline" target="_blank" rel="noopener">Gerry Conway, creator of the Punisher in Spider-Man comics, dies at 73</a>
+        <div class="card-badges"><span class="badge badge-culture">The Guardian</span> <span class="badge badge-score-high">7</span></div>
+      </div>
+      <div class="card-summary">Gerry Conway, a prolific and influential comic book writer, has passed away at 73. He is celebrated for his foundational work with both Marvel and DC, most notably co-creating the iconic Marvel character, The Punisher, within the Spider-Man comics. His contributions significantly shaped popular culture and the superhero narrative.</div>
+      <div class="card-footer"></div>
+    </div>
+    <div class="card culture-card">
+      <div class="card-top">
+        <a href="https://www.theguardian.com/science/2026/may/01/roman-gravestone-new-orleans-returned-italy" class="card-headline" target="_blank" rel="noopener">Ancient Roman gravestone found in New Orleans back yard returned to Italy</a>
+        <div class="card-badges"><span class="badge badge-culture">The Guardian</span> <span class="badge badge-score-high">7</span></div>
+      </div>
+      <div class="card-summary">This article details the return of a nearly 2,000-year-old Roman gravestone, discovered in a New Orleans backyard, to its rightful museum in Italy. It highlights an interesting instance of historical artifact recovery and international cultural heritage preservation.</div>
+      <div class="card-footer"></div>
+    </div>
+    <div class="card culture-card">
+      <div class="card-top">
+        <a href="https://www.theguardian.com/global-development/2026/may/01/sabastian-sawe-hero-welcome-kenya-sub-two-marathon" class="card-headline" target="_blank" rel="noopener">Sabastian Sawe receives hero’s welcome in Kenya after sub-two hour marathon feat</a>
+        <div class="card-badges"><span class="badge badge-culture">The Guardian</span> <span class="badge badge-score-mid">5</span></div>
+      </div>
+      <div class="card-summary">Sabastian Sawe received a hero&#x27;s welcome in his Kenyan home village after becoming the first man to officially run a marathon in under two hours. The record-breaker celebrated his London Marathon win as &#x27;a victory for all of us,&#x27; marking a significant cultural moment for his community.</div>
+      <div class="card-footer"></div>
+    </div></div>
+
+
+  <div class="archive-bar">
+    <a href="2026-05-01.html">← 2026-05-01</a>
+    <span>|</span>
+    <a href="index.html">All digests</a>
+    <span>|</span>
+    <span style="color:#ccc;">Next →</span>
+  </div>
+
+</main>
+</body>
+</html>
