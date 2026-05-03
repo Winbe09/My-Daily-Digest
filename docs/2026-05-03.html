@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KritiDigest — Sunday, May 3, 2026</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Georgia', serif; background: #F4F6FA; color: #1A1A2E; }
+
+header {
+  background: linear-gradient(135deg, #0F3D91 0%, #1A1A2E 100%);
+  color: white; padding: 28px 32px 22px;
+}
+.header-top { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 10px; }
+.digest-title { font-size: 28px; font-weight: 700; letter-spacing: -0.5px; font-family: Arial, sans-serif; }
+.digest-subtitle { font-size: 13px; color: #A8C4F0; margin-top: 3px; font-family: Arial, sans-serif; }
+.header-meta { text-align: right; font-family: Arial, sans-serif; }
+.header-date { font-size: 13px; color: #A8C4F0; }
+.header-count { font-size: 12px; color: #7AAAE8; margin-top: 2px; }
+
+.glance { background: rgba(255,255,255,0.1); border-left: 3px solid #5BA3FF; margin-top: 18px; padding: 12px 16px; border-radius: 4px; }
+.glance-label { font-size: 10px; font-weight: 700; letter-spacing: 1.5px; color: #5BA3FF; text-transform: uppercase; font-family: Arial, sans-serif; margin-bottom: 8px; }
+.glance-list { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+.glance-list li { font-size: 13px; line-height: 1.5; color: #D8E8FF; font-family: Arial, sans-serif; padding-left: 14px; position: relative; }
+.glance-list li::before { content: '–'; position: absolute; left: 0; color: #5BA3FF; font-weight: 700; }
+
+main { max-width: 960px; margin: 0 auto; padding: 28px 16px 60px; }
+
+.big-section { margin: 36px 0 20px; padding: 14px 20px; border-radius: 8px; display: flex; align-items: baseline; gap: 10px; }
+.big-section.news    { background: #E8EDF8; border-left: 4px solid #0F3D91; }
+.big-section.culture { background: #FDF3E8; border-left: 4px solid #C06000; }
+.big-section.thought { background: #EAF4EE; border-left: 4px solid #1A7A40; }
+.big-section-num   { font-size: 11px; font-weight: 700; font-family: Arial, sans-serif; opacity: 0.5; }
+.big-section-title { font-size: 15px; font-weight: 700; font-family: Arial, sans-serif; }
+.big-section.news    .big-section-title { color: #0F3D91; }
+.big-section.culture .big-section-title { color: #8B4500; }
+.big-section.thought .big-section-title { color: #1A7A40; }
+.big-section-desc  { font-size: 12px; font-family: Arial, sans-serif; color: #666; margin-left: auto; font-style: italic; }
+@media (max-width: 600px) { .big-section-desc { display: none; } }
+
+.section-header { display: flex; align-items: center; gap: 10px; margin: 24px 0 12px; }
+.section-icon  { font-size: 15px; }
+.section-title { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #666; font-family: Arial, sans-serif; }
+.section-line  { flex: 1; height: 1px; background: #D8DFF0; }
+
+.card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+@media (max-width: 700px) { .card-grid { grid-template-columns: 1fr; } }
+
+.card { background: white; border-radius: 8px; padding: 16px 18px; box-shadow: 0 1px 4px rgba(0,0,0,0.07); border: 1px solid #E4EAF6; display: flex; flex-direction: column; gap: 8px; transition: box-shadow 0.15s; }
+.card:hover { box-shadow: 0 4px 14px rgba(15,61,145,0.1); }
+.card.culture-card  { border-color: #F0DEC8; }
+.card.culture-card:hover { box-shadow: 0 4px 14px rgba(192,96,0,0.1); }
+.card.thought-card  { border-color: #C8E8D0; background: #FAFFFE; }
+.card.thought-card:hover { box-shadow: 0 4px 14px rgba(26,122,64,0.1); }
+
+.card-top    { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; }
+.card-badges { display: flex; gap: 5px; flex-wrap: wrap; flex-shrink: 0; }
+
+.badge { font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 10px; font-family: Arial, sans-serif; letter-spacing: 0.3px; white-space: nowrap; }
+.badge-source   { background: #E8EDF8; color: #0F3D91; }
+.badge-culture  { background: #FDEBD0; color: #8B4500; }
+.badge-thought  { background: #D8F0E0; color: #1A7A40; }
+.badge-trending { background: #FFF0E0; color: #D4700A; }
+.badge-score-high { background: #E6F7EE; color: #1A7A40; }
+.badge-score-mid  { background: #FFF8E1; color: #9A6B00; }
+
+.card-headline { font-size: 14.5px; font-weight: 700; line-height: 1.4; font-family: Arial, sans-serif; color: #1A1A2E; text-decoration: none; display: block; }
+.card-headline:hover { color: #0F3D91; text-decoration: underline; }
+.thought-card .card-headline:hover { color: #1A7A40; }
+.culture-card .card-headline:hover { color: #8B4500; }
+
+.card-summary { font-size: 12.5px; line-height: 1.6; color: #444466; font-family: Arial, sans-serif; }
+
+.card-footer { display: flex; align-items: center; margin-top: 4px; padding-top: 8px; border-top: 1px solid #F0F4FF; }
+.thought-card .card-footer { border-top-color: #D8F0E0; }
+.culture-card .card-footer { border-top-color: #F5E8D8; }
+.card-also { font-size: 10.5px; color: #8899BB; font-family: Arial, sans-serif; font-style: italic; }
+
+.card.featured { grid-column: 1 / -1; flex-direction: row; gap: 20px; background: linear-gradient(135deg, #F0F5FF 0%, #FAFBFF 100%); border: 1px solid #C0CFEE; }
+.featured-body { flex: 1; display: flex; flex-direction: column; gap: 8px; }
+.featured-label { font-size: 10px; font-weight: 700; letter-spacing: 1.5px; color: #0F3D91; text-transform: uppercase; font-family: Arial, sans-serif; }
+.card.featured .card-headline { font-size: 17px; }
+.card.featured .card-summary  { font-size: 13px; }
+
+.card.thought-featured { grid-column: 1 / -1; flex-direction: row; gap: 20px; background: linear-gradient(135deg, #EAF7EE 0%, #F8FFFA 100%); border: 1px solid #A8DABC; }
+.thought-featured .featured-label { color: #1A7A40; }
+.thought-featured .card-headline  { font-size: 17px; }
+.thought-featured .card-headline:hover { color: #1A7A40; }
+.thought-featured .card-footer { border-top-color: #C8E8D0; }
+
+@media (max-width: 700px) { .card.featured, .card.thought-featured { flex-direction: column; } }
+
+.big-divider { border: none; border-top: 2px dashed #D0D8EE; margin: 44px 0 0; }
+
+.archive-bar { text-align: center; margin-top: 48px; padding-top: 24px; border-top: 1px solid #D8E0F0; font-family: Arial, sans-serif; }
+.archive-bar a { font-size: 12px; color: #0F3D91; text-decoration: none; }
+.archive-bar a:hover { text-decoration: underline; }
+.archive-bar span { color: #AAB8D8; margin: 0 8px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-top">
+    <div>
+      <div class="digest-title">KritiDigest</div>
+      <div class="digest-subtitle">Your personalised AI news briefing</div>
+    </div>
+    <div class="header-meta">
+      <div class="header-date">Sunday, May 3, 2026</div>
+      <div class="header-count">23 articles · 4 sources · 0 trending</div>
+    </div>
+  </div>
+  <div class="glance">
+    <div class="glance-label">Today at a Glance</div>
+    <ul class="glance-list">
+      <li>Rising governmental scrutiny over tech-related discourse and events, exemplified by Zambia&#x27;s RightsCon cancellation, demands vigilant compliance and geopolitical risk assessment for global AI GTM strategies.</li>
+      <li>Significant shifts in major alliances, such as the US troop withdrawal from Germany and ongoing US-Iran tensions, introduce geopolitical instability that can impact global market confidence and enterprise tech investment cycles for devtools.</li>
+      <li>The Mercedes F1 strategic journey offers a pertinent case study in organizational resilience and competitive adaptation, providing valuable insights for navigating dynamic devtools markets and evolving AI GTM approaches.</li>
+    </ul>
+  </div>
+</header>
+
+<main>
+
+  <div class="big-section news">
+    <span class="big-section-num">01</span>
+    <span class="big-section-title">What's Happening</span>
+    <span class="big-section-desc">News · Geopolitics · Business · Tech</span>
+  </div>
+
+  <div class="section-header">
+    <span class="section-icon">🌍</span>
+    <span class="section-title">Geopolitics</span>
+    <div class="section-line"></div>
+  </div>
+  <div class="card-grid">
+    <div class="card featured ">
+      <div class="featured-body">
+        <div class="featured-label" style="color:#0F3D91;">Top Story</div>
+        <div class="card-top">
+          <a href="https://www.theguardian.com/global-development/2026/may/02/zambia-cancels-rightscon-summit-largest-human-rights-technology-conference" class="card-headline" target="_blank" rel="noopener" style="">Zambia cancels world’s largest human rights and tech summit days before start</a>
+          <div class="card-badges"><span class="badge badge-source">The Guardian</span> <span class="badge badge-score-high">9</span></div>
+        </div>
+        <div class="card-summary">Zambia has abruptly canceled RightsCon 2026, the world&#x27;s largest human rights and technology summit, citing a misalignment with &#x27;national values.&#x27; This development highlights increasing governmental scrutiny and control over tech-related events and discourse, which is crucial for a strategy professional to consider when navigating international markets and devising global AI GTM strategies for a devtools company.</div>
+        <div class="card-footer"></div>
+      </div>
+    </div>
+    <div class="card ">
+      <div class="card-top">
+        <a href="https://www.theguardian.com/world/live/2026/may/02/us-israel-war-iran-germany-american-troops-donald-trump-middle-east-latest-news-updates" class="card-headline" target="_blank" rel="noopener">Top Republicans express concern over withdrawal of US troops from Germany – as it happened</a>
+        <div class="card-badges"><span class="badge badge-source">The Guardian</span> <span class="badge badge-score-high">9</span></div>
+      </div>
+      <div class="card-summary">This report details concerns from top Republican officials regarding the US decision to withdraw troops from Germany, highlighting potential risks to NATO&#x27;s deterrence capabilities and the strategic message it sends to Russia. As a strategy professional, understanding such geopolitical shifts is crucial for assessing global stability, international relations, and the broader context that influences market dynamics and enterprise decision-making.</div>
+      <div class="card-footer"></div>
+    </div>
+    <div class="card ">
+      <div class="card-top">
+        <a href="https://www.theguardian.com/world/2026/may/02/nato-us-withdraw-troops-germany-defence" class="card-headline" target="_blank" rel="noopener">Nato seeks to ‘understand the details’ of US decision to withdraw troops from Germany</a>
+        <div class="card-badges"><span class="badge badge-source">The Guardian</span> <span class="badge badge-score-high">9</span></div>
+      </div>
+      <div class="card-summary">This piece outlines NATO&#x27;s efforts to grasp the full implications of the US decision to withdraw 5,000 troops from Germany, a move Berlin views as anticipated and a catalyst for Europe to bolster its own defense investments. For a strategy professional, this development signals important shifts in transatlantic alliances and geopolitical stability, which can indirectly influence global market confidence and long-term strategic planning.</div>
+      <div class="card-footer"></div>
+    </div>
+    <div class="card ">
+      <div class="card-top">
+        <a href="https://www.theguardian.com/world/2026/may/03/trump-says-iran-has-not-yet-paid-a-big-enough-price-as-he-reviews-new-peace-proposal" class="card-headline" target="_blank" rel="noopener">Trump says Iran has not yet ‘paid a big enough price’ as he reviews new peace proposal</a>
+        <div class="card-badges"><span class="badge badge-source">The Guardian</span> <span class="badge badge-score-high">9</span></div>
+      </div>
+      <div class="card-summary">This article details former President Trump&#x27;s skeptical reaction to a new peace proposal from Tehran, indicating he believes Iran has not yet faced adequate repercussions. This highlights persistent geopolitical friction between the U.S. and Iran, a critical factor for understanding global stability and its potential impacts on macroeconomics and international business environments relevant to your strategic role.</div>
+      <div class="card-footer"></div>
+    </div>
+    <div class="card ">
+      <div class="card-top">
+        <a href="https://economictimes.indiatimes.com/markets/us-stocks/news/ai-spending-boom-soars-but-no-returns-for-big-tech-giants-warns-jefferies-chris-wood/articleshow/130713359.cms" class="card-headline" target="_blank" rel="noopener">AI spending boom soars but no returns for big tech giants, warns Jefferies’ Chris Wood</a>
+        <div class="card-badges"><span class="badge badge-source">Economic Times</span> <span class="badge badge-score-high">9</span></div>
+      </div>
+      <div class="card-summary">This article highlights concerns from Jefferies regarding the uncertain return on investment for big tech&#x27;s soaring AI capital expenditures, which are straining cash flows despite aggressive spending. For your role in AI GTM strategy, this signals potential challenges in the AI monetization landscape and could influence strategic partnerships, competitive positioning, and the long-term viability of current AI business models within the enterprise software ecosystem.</div>
+      <div class="card-footer"></div>
+    </div>
+    <div class="card ">
+      <div class="card-top">
+        <a href="https://timesofindia.indiatimes.com/india/bjp-dominant-india-or-decoding-layers-of-saffron-supremacy-across-country/articleshow/130714003.cms" class="card-headline" target="_blank" rel="noopener">BJP-dominant India or ... ? Decoding layers of saffron supremacy across country</a>
+        <div class="card-badges"><span class="badge badge-source">Times of India</span> <span class="badge badge-score-high">9</span></div>
+      </div>
+      <div class="card-summary">This article decodes the nuances of the BJP&#x27;s political dominance across India, differentiating between strongholds and regions requiring alliances to secure power. For you, this provides vital context on India&#x27;s evolving geopolitical standing, potential shifts in macroeconomic policy, and the underlying political stability impacting the business environment for global tech and devtools companies considering or operating in this key market.</div>
+      <div class="card-footer"></div>
+    </div>
+    <div class="card ">
+      <div class="card-top">
+        <a href="https://timesofindia.indiatimes.com/world/europe/not-anymore-ukraine-hits-two-shadow-fleet-tankers-carrying-oil-near-russia-launches-300-drones/articleshow/130728392.cms" class="card-headline" target="_blank" rel="noopener">Ukraine hits two shadow fleet tankers carrying oil near Russia, launches 300+ drones</a>
+        <div class="card-badges"><span class="badge badge-source">Times of India</span> <span class="badge badge-score-high">9</span></div>
+      </div>
+      <div class="card-summary">Ukrainian drone strikes on Russian oil tankers near Novorossiysk port signify an intensified strategy to disrupt Russia&#x27;s energy exports, impacting global geopolitics and potentially oil markets. This development showcases evolving tactics in modern warfare and the strategic use of drone technology against critical infrastructure.</div>
+      <div class="card-footer"></div>
+    </div>
+    <div class="card ">
+      <div class="card-top">
+        <a href="https://timesofindia.indiatimes.com/world/middle-east/iranian-super-tanker-slips-past-us-blockade-with-220-million-oil-cargo/articleshow/130728054.cms" class="card-headline" target="_blank" rel="noopener">Iranian super tanker slips past US blockade with $220 million oil cargo</a>
+        <div class="card-badges"><span class="badge badge-source">Times of India</span> <span class="badge badge-score-high">9</span></div>
+      </div>
+      <div class="card-summary">An Iranian supertanker reportedly evaded a US naval blockade in the Strait of Hormuz, successfully delivering a significant crude oil cargo to Asia. This incident highlights escalating geopolitical tensions and challenges to international sanctions, which could have ripple effects on global energy markets and broader economic stability.</div>
+      <div class="card-footer"></div>
+    </div>
+    <div class="card ">
+      <div class="card-top">
+        <a href="https://timesofindia.indiatimes.com/world/us/if-they-misbehave-trump-warns-of-fresh-strikes-says-he-wants-to-eliminate-irans-missile-capability/articleshow/130726503.cms" class="card-headline" target="_blank" rel="noopener">&#x27;If they misbehave…&#x27;: Trump warns of fresh strikes, says he wants to &#x27;eliminate&#x27; Iran&#x27;s missile capability</a>
+        <div class="card-badges"><span class="badge badge-source">Times of India</span> <span class="badge badge-score-high">9</span></div>
+      </div>
+      <div class="card-summary">President Trump is indicating the possibility of new military strikes against Iran, aiming to &#x27;eliminate&#x27; their missile capability and expressing doubt about a new peace proposal. As a strategy professional, this signals a significant escalation in geopolitical tensions that could have cascading effects on global markets, energy stability, and international business operations, warranting close strategic monitoring.</div>
+      <div class="card-footer"></div>
+    </div>
+    <div class="card ">
+      <div class="card-top">
+        <a href="https://timesofindia.indiatimes.com/world/us/not-yet-paid-a-big-enough-price-donald-trump-sceptical-as-iran-submits-14-point-plan-to-end-war/articleshow/130726204.cms" class="card-headline" target="_blank" rel="noopener">‘Not yet paid a big enough price’: Trump sceptical as Iran submits 14-point plan to end war</a>
+        <div class="card-badges"><span class="badge badge-source">Times of India</span> <span class="badge badge-score-high">9</span></div>
+      </div>
+      <div class="card-summary">This article details former President Trump&#x27;s skepticism regarding a new 14-point peace plan submitted by Iran, arguing that Iran has not yet sufficiently &#x27;paid a price&#x27; for past actions. The proposed framework, reportedly seeking security guarantees and US troop withdrawals, highlights ongoing geopolitical tensions that could impact global stability and strategic planning for international businesses.</div>
+      <div class="card-footer"></div>
+    </div>
+    <div class="card ">
+      <div class="card-top">
+        <a href="https://www.theguardian.com/australia-news/live/2026/may/03/politics-updates-liberals-nepean-byelection-victoria-anthony-albanese-labor-angus-taylor-matt-canavan-nationals-ntwnfb" class="card-headline" target="_blank" rel="noopener">Dozens paddle out in Sydney and Newcastle in solidarity with Gaza Flotilla – as it happened</a>
+        <div class="card-badges"><span class="badge badge-source">The Guardian</span> <span class="badge badge-score-high">8</span></div>
+      </div>
+      <div class="card-summary">This article details local protests in Australia demonstrating solidarity with the Gaza Flotilla, a current event stemming from significant global geopolitical tensions. For a strategy professional, staying abreast of such international events is crucial as they can impact market stability, international relations, and overall business sentiment, indirectly influencing tech GTM strategies. The snippet also touches upon domestic Australian political dynamics, offering additional contextual awareness.</div>
+      <div class="card-footer"></div>
+    </div>
+    <div class="card ">
+      <div class="card-top">
+        <a href="https://www.theguardian.com/uk-news/2026/may/02/asylum-seeker-sent-france-one-in-one-out-returned-syria" class="card-headline" target="_blank" rel="noopener">Asylum seeker sent back to France in ‘one in, one out’ scheme to be returned to Syria</a>
+        <div class="card-badges"><span class="badge badge-source">The Guardian</span> <span class="badge badge-score-high">8</span></div>
+      </div>
+      <div class="card-summary">This piece from The Guardian details a controversial case where a Syrian asylum seeker, returned to France under a &#x27;one in, one out&#x27; scheme, now faces forced return to Syria due to French authorities ruling the country safe. This situation underscores the complex humanitarian and geopolitical challenges arising from ongoing conflicts and international migration policies, offering insight into the broader global instability that can influence international business and market environments.</div>
+      <div class="card-footer"></div>
+    </div>
+    <div class="card ">
+      <div class="card-top">
+        <a href="https://www.theguardian.com/world/2026/may/03/nato-meets-tv-and-film-makers-causing-concerns-it-seeks-propaganda" class="card-headline" target="_blank" rel="noopener">Nato meetings with TV and film-makers prompt claims it is seeking ‘propaganda’</a>
+        <div class="card-badges"><span class="badge badge-source">The Guardian</span> <span class="badge badge-score-high">8</span></div>
+      </div>
+      <div class="card-summary">This article reveals NATO&#x27;s confidential meetings with European and US film and TV screenwriters, directors, and producers, sparking accusations that the alliance is seeking to create propaganda. For a strategy professional, this offers insight into how geopolitical entities engage with cultural industries for strategic communication and narrative influence, reflecting broader soft power dynamics in international relations.</div>
+      <div class="card-footer"></div>
+    </div>
+    <div class="card ">
+      <div class="card-top">
+        <a href="https://www.theguardian.com/business/2026/may/02/spirit-airlines-ceases-operations-blame" class="card-headline" target="_blank" rel="noopener">Political blame game begins and passengers left adrift after Spirit ceases operations</a>
+        <div class="card-badges"><span class="badge badge-source">The Guardian</span> <span class="badge badge-score-high">8</span></div>
+      </div>
+      <div class="card-summary">This article details the sudden cessation of Spirit Airlines&#x27; operations, highlighting the complex interplay of geopolitical events (Iran war impacting fuel prices) and regulatory decisions (blocked JetBlue deal) as contributing factors. For a strategy professional, it offers a real-world case study on how external macroeconomic and political pressures can critically impact industry stability and competitive dynamics, informing broader GTM planning and risk assessment.</div>
+      <div class="card-footer"></div>
+    </div>
+    <div class="card ">
+      <div class="card-top">
+        <a href="https://economictimes.indiatimes.com/markets/expert-view/largecap-it-stocks-as-a-value-play-bnp-paribas-kumar-rakesh-issues-a-reality-check/articleshow/130713275.cms" class="card-headline" target="_blank" rel="noopener">Largecap IT stocks as a value play? BNP Paribas’ Kumar Rakesh issues a reality check</a>
+        <div class="card-badges"><span class="badge badge-source">Economic Times</span> <span class="badge badge-score-high">8</span></div>
+      </div>
+      <div class="card-summary">An analyst from BNP Paribas casts doubt on the &#x27;value&#x27; narrative for largecap IT stocks, citing weak FY27 guidance, stalled client spending, and significant AI-led disruption. This offers a crucial reality check on current market trends and investment risks within the IT sector, providing insights into the economic pressures and AI&#x27;s impact relevant to your AI GTM strategy and the broader enterprise software landscape.</div>
+      <div class="card-footer"></div>
+    </div>
+    <div class="card ">
+      <div class="card-top">
+        <a href="https://economictimes.indiatimes.com/news/international/global-trends/trump-jokes-us-navy-will-take-on-cuba-on-the-way-home-from-iran/articleshow/130712980.cms" class="card-headline" target="_blank" rel="noopener">Trump jokes US Navy will take on Cuba on the way home from Iran</a>
+        <div class="card-badges"><span class="badge badge-source">Economic Times</span> <span class="badge badge-score-high">8</span></div>
+      </div>
+      <div class="card-summary">This news snippet reports on former President Trump&#x27;s jest about the U.S. Navy confronting Cuba en route from Iran, highlighting ongoing political rhetoric and pressure tactics in U.S. foreign policy. For a strategy professional, this provides insight into the unpredictable nature of global geopolitics and the potential for shifts in international relations, which can indirectly influence market stability and global business strategy.</div>
+      <div class="card-footer"></div>
+    </div>
+  </div>
+  <div class="section-header">
+    <span class="section-icon">📈</span>
+    <span class="section-title">Business &amp; Markets</span>
+    <div class="section-line"></div>
+  </div>
+  <div class="card-grid">
+    <div class="card featured ">
+      <div class="featured-body">
+        <div class="featured-label" style="color:#0F3D91;">Top Story</div>
+        <div class="card-top">
+          <a href="https://timesofindia.indiatimes.com/technology/tech-news/after-20000-plus-layoffs-how-oracles-promise-to-sam-altman-is-hurting-banks-across-america-including-jpmorgan/articleshow/130724125.cms" class="card-headline" target="_blank" rel="noopener" style="">After over 20K layoffs, how Oracle&#x27;s &#x27;promise&#x27; to Sam Altman is hurting banks across US</a>
+          <div class="card-badges"><span class="badge badge-source">Times of India</span> <span class="badge badge-score-high">9</span></div>
+        </div>
+        <div class="card-summary">This article details Oracle&#x27;s ambitious $300 billion data center expansion for OpenAI, revealing the substantial bank-debt challenges faced by lenders due to exposure limits, which impacts financing for such massive AI infrastructure projects. For an AI GTM strategist, this highlights the immense capital requirements and market constraints involved in scaling foundational AI capabilities. It also provides context on Oracle&#x27;s broader strategic decisions, including significant layoffs, as it navigates these large-scale investments.</div>
+        <div class="card-footer"></div>
+      </div>
+    </div>
+    <div class="card ">
+      <div class="card-top">
+        <a href="https://techcrunch.com/2026/05/02/the-best-ai-powered-dictation-apps-of-2025/" class="card-headline" target="_blank" rel="noopener">The best AI dictation apps, tested and ranked</a>
+        <div class="card-badges"><span class="badge badge-source">TechCrunch</span> <span class="badge badge-score-high">8</span></div>
+      </div>
+      <div class="card-summary">This article reviews the best AI-powered dictation applications, detailing their utility for common professional tasks like email and note-taking, and notably, for coding through voice. For your role leading AI GTM strategy at a devtools company, understanding the evolving capabilities and market adoption of practical AI tools like these is crucial for identifying potential integrations or competitive landscapes.</div>
+      <div class="card-footer"></div>
+    </div>
+    <div class="card ">
+      <div class="card-top">
+        <a href="https://www.theguardian.com/business/2026/may/03/dynamic-pay-uber-tuc" class="card-headline" target="_blank" rel="noopener">Dynamic pay on platforms such as Uber should be banned, says TUC</a>
+        <div class="card-badges"><span class="badge badge-source">The Guardian</span> <span class="badge badge-score-high">8</span></div>
+      </div>
+      <div class="card-summary">The UK&#x27;s TUC is advocating for a ban on &#x27;dynamic pricing&#x27; for worker pay on gig economy platforms like Uber, citing worker dissatisfaction and unpredictability. This development signals increasing regulatory and ethical scrutiny of algorithmic management, offering insights into potential operational and Go-To-Market risks for tech companies leveraging complex pricing or resource allocation algorithms, even those beyond the immediate gig economy context.</div>
+      <div class="card-footer"></div>
+    </div>
+  </div>
+  <div class="section-header">
+    <span class="section-icon">⚡</span>
+    <span class="section-title">Tech Trends</span>
+    <div class="section-line"></div>
+  </div>
+  <div class="card-grid">
+    <div class="card featured ">
+      <div class="featured-body">
+        <div class="featured-label" style="color:#0F3D91;">Top Story</div>
+        <div class="card-top">
+          <a href="https://techcrunch.com/2026/05/02/ai-generated-actors-and-scripts-are-now-ineligible-for-oscars/" class="card-headline" target="_blank" rel="noopener" style="">AI-generated actors and scripts are now ineligible for Oscars</a>
+          <div class="card-badges"><span class="badge badge-source">TechCrunch</span> <span class="badge badge-score-high">8</span></div>
+        </div>
+        <div class="card-summary">The Academy of Motion Picture Arts and Sciences has updated its eligibility rules, explicitly disqualifying films with &#x27;AI-generated actors&#x27; or &#x27;substantive portions of AI-generated script&#x27; from Oscar consideration. This development highlights the ongoing debate and evolving standards for integrating AI into creative industries, offering insights into the regulatory and ethical challenges for AI adoption beyond traditional tech sectors.</div>
+        <div class="card-footer"></div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="big-divider">
+  <div class="big-section culture">
+    <span class="big-section-num">02</span>
+    <span class="big-section-title">Art, Culture &amp; Lifestyle</span>
+    <span class="big-section-desc">Entertainment · Arts · Living</span>
+  </div>
+  
+  <div class="section-header">
+    <span class="section-icon">🎨</span>
+    <span class="section-title">Entertainment &amp; Arts</span>
+    <div class="section-line"></div>
+  </div>
+  <div class="card-grid">
+    <div class="card culture-card">
+      <div class="card-top">
+        <a href="https://www.theguardian.com/science/2026/may/02/germany-brazil-irritator-dinosaur-skull-restitution" class="card-headline" target="_blank" rel="noopener">German museum to return rare Irritator dinosaur skull to Brazil</a>
+        <div class="card-badges"><span class="badge badge-culture">The Guardian</span> <span class="badge badge-score-high">7</span></div>
+      </div>
+      <div class="card-summary">This report details the restitution of a rare 113-million-year-old Irritator dinosaur skull by a German museum to Brazil, concluding a long-running international campaign. It highlights complex cultural heritage debates and international relations around artifact provenance, offering a non-traditional lens on global ethical considerations and historical transactional ethics.</div>
+      <div class="card-footer"></div>
+    </div>
+    <div class="card culture-card">
+      <div class="card-top">
+        <a href="https://timesofindia.indiatimes.com/india/sudesh-kumar-hero-of-saranga-and-producer-of-uljhan-passes-away/articleshow/130724265.cms" class="card-headline" target="_blank" rel="noopener">Sudesh Kumar, hero of ‘Saranga’ and producer of ‘Uljhan’, passes away</a>
+        <div class="card-badges"><span class="badge badge-culture">Times of India</span> <span class="badge badge-score-high">7</span></div>
+      </div>
+      <div class="card-summary">This article notes the passing of Sudesh Kumar, a veteran actor and producer recognized for his work in Indian cinema and theatre. For someone with an interest in culture and entertainment, this marks the end of an era for a significant figure in the arts.</div>
+      <div class="card-footer"></div>
+    </div></div>
+
+  <hr class="big-divider">
+  <div class="big-section thought">
+    <span class="big-section-num">03</span>
+    <span class="big-section-title">Thought Leadership &amp; Education</span>
+    <span class="big-section-desc">HBR · McKinsey · Longform · Strategy</span>
+  </div>
+  
+  <div class="section-header">
+    <span class="section-icon">🧠</span>
+    <span class="section-title">Strategy &amp; Leadership</span>
+    <div class="section-line"></div>
+  </div>
+  <div class="card-grid">
+    <div class="card thought-featured thought-card">
+      <div class="featured-body">
+        <div class="featured-label" style="color:#1A7A40;">Times of India</div>
+        <div class="card-top">
+          <a href="https://timesofindia.indiatimes.com/sports/racing/top-stories/mercedes-in-f1-rise-fall-and-rebirth-of-an-empire-the-story-of-a-team-that-refused-to-stay-down/articleshow/130727809.cms" class="card-headline" target="_blank" rel="noopener" style="">Mercedes in F1: Rise, fall, and rebirth of an empire</a>
+          <div class="card-badges"><span class="badge badge-thought">Times of India</span> <span class="badge badge-score-high">8</span></div>
+        </div>
+        <div class="card-summary">This article details the strategic journey of the Mercedes F1 team, outlining its periods of market dominance, significant setbacks, and subsequent &#x27;rebirths&#x27; driven by organizational restructuring and strategic learning. For a strategy professional, this offers a valuable case study in adapting to competitive pressures, fostering resilience, and navigating leadership challenges within a high-performance, complex enterprise.</div>
+        <div class="card-footer"></div>
+      </div>
+    </div></div>
+
+  <div class="archive-bar">
+    <a href="2026-05-02.html">← 2026-05-02</a>
+    <span>|</span>
+    <a href="index.html">All digests</a>
+    <span>|</span>
+    <span style="color:#ccc;">Next →</span>
+  </div>
+
+</main>
+</body>
+</html>
