@@ -4,10 +4,10 @@ on:
   schedule:
     # 01:30 UTC = 07:00 AM IST (UTC+5:30)
     - cron: "30 1 * * *"
-  workflow_dispatch:    # allows manual trigger from GitHub Actions UI
+  workflow_dispatch:
 
 permissions:
-  contents: write       # needed to commit the generated HTML back to the repo
+  contents: write
 
 jobs:
   build-digest:
@@ -33,14 +33,12 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Run digest pipeline
-        env:
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: python src/main.py
 
       - name: Commit and push digest
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: "digest: ${{ github.run_id }} — $(date -u '+%Y-%m-%d')"
+          commit_message: "digest: $(date -u '+%Y-%m-%d')"
           file_pattern: "docs/*.html"
           commit_user_name: "KritiDigest Bot"
           commit_user_email: "digest-bot@users.noreply.github.com"
