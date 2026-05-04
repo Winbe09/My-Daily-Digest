@@ -6,95 +6,41 @@
 <title>KritiDigest — Monday, May 4, 2026</title>
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: 'Georgia', serif; background: #F4F6FA; color: #1A1A2E; }
+body { font-family: Arial, sans-serif; background: #F4F6FA; color: #1A1A2E; }
 
 header {
   background: linear-gradient(135deg, #0F3D91 0%, #1A1A2E 100%);
   color: white; padding: 28px 32px 22px;
 }
 .header-top { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 10px; }
-.digest-title { font-size: 28px; font-weight: 700; letter-spacing: -0.5px; font-family: Arial, sans-serif; }
-.digest-subtitle { font-size: 13px; color: #A8C4F0; margin-top: 3px; font-family: Arial, sans-serif; }
-.header-meta { text-align: right; font-family: Arial, sans-serif; }
-.header-date { font-size: 13px; color: #A8C4F0; }
-.header-count { font-size: 12px; color: #7AAAE8; margin-top: 2px; }
+.digest-title { font-size: 28px; font-weight: 700; letter-spacing: -0.5px; }
+.digest-subtitle { font-size: 15px; color: #A8C4F0; margin-top: 3px; }
+.header-meta { text-align: right; }
+.header-date  { font-size: 15px; color: #A8C4F0; }
+.header-count { font-size: 13px; color: #7AAAE8; margin-top: 2px; }
 
-.glance { background: rgba(255,255,255,0.1); border-left: 3px solid #5BA3FF; margin-top: 18px; padding: 12px 16px; border-radius: 4px; }
-.glance-label { font-size: 10px; font-weight: 700; letter-spacing: 1.5px; color: #5BA3FF; text-transform: uppercase; font-family: Arial, sans-serif; margin-bottom: 8px; }
-.glance-list { list-style: none; display: flex; flex-direction: column; gap: 6px; }
-.glance-list li { font-size: 13px; line-height: 1.5; color: #D8E8FF; font-family: Arial, sans-serif; padding-left: 14px; position: relative; }
-.glance-list li::before { content: '–'; position: absolute; left: 0; color: #5BA3FF; font-weight: 700; }
+main { max-width: 860px; margin: 0 auto; padding: 32px 20px 60px; }
 
-main { max-width: 960px; margin: 0 auto; padding: 28px 16px 60px; }
+.source-block { margin-bottom: 32px; }
+.source-name {
+  font-size: 13px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+  color: #0F3D91; margin-bottom: 10px;
+  padding-bottom: 6px; border-bottom: 2px solid #D0D8EE;
+}
+.article-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.article-item { display: flex; align-items: baseline; gap: 8px; }
+.article-item::before { content: '→'; color: #A0AABF; font-size: 12px; flex-shrink: 0; }
+.article-link {
+  font-size: 16px; color: #1A1A2E; text-decoration: none; line-height: 1.4;
+}
+.article-link:hover { color: #0F3D91; text-decoration: underline; }
+.article-also { font-size: 12px; color: #AABBCC; margin-left: 4px; font-style: italic; white-space: nowrap; }
 
-.big-section { margin: 36px 0 20px; padding: 14px 20px; border-radius: 8px; display: flex; align-items: baseline; gap: 10px; }
-.big-section.news    { background: #E8EDF8; border-left: 4px solid #0F3D91; }
-.big-section.culture { background: #FDF3E8; border-left: 4px solid #C06000; }
-.big-section.thought { background: #EAF4EE; border-left: 4px solid #1A7A40; }
-.big-section-num   { font-size: 11px; font-weight: 700; font-family: Arial, sans-serif; opacity: 0.5; }
-.big-section-title { font-size: 15px; font-weight: 700; font-family: Arial, sans-serif; }
-.big-section.news    .big-section-title { color: #0F3D91; }
-.big-section.culture .big-section-title { color: #8B4500; }
-.big-section.thought .big-section-title { color: #1A7A40; }
-.big-section-desc  { font-size: 12px; font-family: Arial, sans-serif; color: #666; margin-left: auto; font-style: italic; }
-@media (max-width: 600px) { .big-section-desc { display: none; } }
-
-.section-header { display: flex; align-items: center; gap: 10px; margin: 24px 0 12px; }
-.section-icon  { font-size: 15px; }
-.section-title { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #666; font-family: Arial, sans-serif; }
-.section-line  { flex: 1; height: 1px; background: #D8DFF0; }
-
-.card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-@media (max-width: 700px) { .card-grid { grid-template-columns: 1fr; } }
-
-.card { background: white; border-radius: 8px; padding: 16px 18px; box-shadow: 0 1px 4px rgba(0,0,0,0.07); border: 1px solid #E4EAF6; display: flex; flex-direction: column; gap: 8px; transition: box-shadow 0.15s; }
-.card:hover { box-shadow: 0 4px 14px rgba(15,61,145,0.1); }
-.card.culture-card  { border-color: #F0DEC8; }
-.card.culture-card:hover { box-shadow: 0 4px 14px rgba(192,96,0,0.1); }
-.card.thought-card  { border-color: #C8E8D0; background: #FAFFFE; }
-.card.thought-card:hover { box-shadow: 0 4px 14px rgba(26,122,64,0.1); }
-
-.card-top    { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; }
-.card-badges { display: flex; gap: 5px; flex-wrap: wrap; flex-shrink: 0; }
-
-.badge { font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 10px; font-family: Arial, sans-serif; letter-spacing: 0.3px; white-space: nowrap; }
-.badge-source   { background: #E8EDF8; color: #0F3D91; }
-.badge-culture  { background: #FDEBD0; color: #8B4500; }
-.badge-thought  { background: #D8F0E0; color: #1A7A40; }
-.badge-trending { background: #FFF0E0; color: #D4700A; }
-.badge-score-high { background: #E6F7EE; color: #1A7A40; }
-.badge-score-mid  { background: #FFF8E1; color: #9A6B00; }
-
-.card-headline { font-size: 14.5px; font-weight: 700; line-height: 1.4; font-family: Arial, sans-serif; color: #1A1A2E; text-decoration: none; display: block; }
-.card-headline:hover { color: #0F3D91; text-decoration: underline; }
-.thought-card .card-headline:hover { color: #1A7A40; }
-.culture-card .card-headline:hover { color: #8B4500; }
-
-.card-summary { font-size: 12.5px; line-height: 1.6; color: #444466; font-family: Arial, sans-serif; }
-
-.card-footer { display: flex; align-items: center; margin-top: 4px; padding-top: 8px; border-top: 1px solid #F0F4FF; }
-.thought-card .card-footer { border-top-color: #D8F0E0; }
-.culture-card .card-footer { border-top-color: #F5E8D8; }
-.card-also { font-size: 10.5px; color: #8899BB; font-family: Arial, sans-serif; font-style: italic; }
-
-.card.featured { grid-column: 1 / -1; flex-direction: row; gap: 20px; background: linear-gradient(135deg, #F0F5FF 0%, #FAFBFF 100%); border: 1px solid #C0CFEE; }
-.featured-body { flex: 1; display: flex; flex-direction: column; gap: 8px; }
-.featured-label { font-size: 10px; font-weight: 700; letter-spacing: 1.5px; color: #0F3D91; text-transform: uppercase; font-family: Arial, sans-serif; }
-.card.featured .card-headline { font-size: 17px; }
-.card.featured .card-summary  { font-size: 13px; }
-
-.card.thought-featured { grid-column: 1 / -1; flex-direction: row; gap: 20px; background: linear-gradient(135deg, #EAF7EE 0%, #F8FFFA 100%); border: 1px solid #A8DABC; }
-.thought-featured .featured-label { color: #1A7A40; }
-.thought-featured .card-headline  { font-size: 17px; }
-.thought-featured .card-headline:hover { color: #1A7A40; }
-.thought-featured .card-footer { border-top-color: #C8E8D0; }
-
-@media (max-width: 700px) { .card.featured, .card.thought-featured { flex-direction: column; } }
-
-.big-divider { border: none; border-top: 2px dashed #D0D8EE; margin: 44px 0 0; }
-
-.archive-bar { text-align: center; margin-top: 48px; padding-top: 24px; border-top: 1px solid #D8E0F0; font-family: Arial, sans-serif; }
-.archive-bar a { font-size: 12px; color: #0F3D91; text-decoration: none; }
+.archive-bar {
+  text-align: center; margin-top: 48px; padding-top: 24px;
+  border-top: 1px solid #D8E0F0;
+}
+.archive-bar a { font-size: 14px; color: #0F3D91; text-decoration: none; }
 .archive-bar a:hover { text-decoration: underline; }
 .archive-bar span { color: #AAB8D8; margin: 0 8px; }
 </style>
@@ -105,270 +51,113 @@ main { max-width: 960px; margin: 0 auto; padding: 28px 16px 60px; }
   <div class="header-top">
     <div>
       <div class="digest-title">KritiDigest</div>
-      <div class="digest-subtitle">Your personalised AI news briefing</div>
+      <div class="digest-subtitle">Your daily news digest</div>
     </div>
     <div class="header-meta">
       <div class="header-date">Monday, May 4, 2026</div>
-      <div class="header-count">24 articles · 4 sources · 0 trending</div>
+      <div class="header-count">80 articles · 4 sources</div>
     </div>
-  </div>
-  <div class="glance">
-    <div class="glance-label">Today at a Glance</div>
-    <ul class="glance-list">
-      <li>AWS&#x27;s CEO affirms AI as a &quot;huge business opportunity&quot; for software, citing agentic AI and new productivity tools, which validates a robust market for AI-driven devtools.</li>
-      <li>Significant VC investment in foundational AI technologies indicates a maturing market and strategic opportunities for devtools focused on core AI infrastructure and tooling.</li>
-      <li>Failures in AI deployment, such as Kenya&#x27;s health reforms increasing costs for the poor, emphasize the critical need for AI devtools GTM to prioritize ethical considerations and equitable outcomes.</li>
-      <li>Escalating geopolitical tensions in the Middle East suggest potential supply chain disruptions and macro-economic volatility that GTM strategies for devtools should monitor for market impact.</li>
-    </ul>
   </div>
 </header>
 
 <main>
 
-  <div class="big-section news">
-    <span class="big-section-num">01</span>
-    <span class="big-section-title">What's Happening</span>
-    <span class="big-section-desc">News · Geopolitics · Business · Tech</span>
+  <div class="source-block">
+    <div class="source-name">TechCrunch</div>
+    <ul class="article-list"><li class="article-item"><a href="https://techcrunch.com/2026/05/04/as-x-shuts-down-communities-acorn-debuts-an-alternative-that-puts-creators-in-control/" class="article-link" target="_blank" rel="noopener">As X shuts down Communities, Acorn debuts an alternative that puts creators in control</a></li>
+<li class="article-item"><a href="https://techcrunch.com/2026/05/04/us-healthcare-marketplaces-shared-citizenship-and-race-data-with-ad-tech-giants/" class="article-link" target="_blank" rel="noopener">US healthcare marketplaces shared citizenship and race data with ad tech giants</a></li>
+<li class="article-item"><a href="https://techcrunch.com/2026/05/04/amazon-opens-up-its-global-logistics-network-to-all-businesses/" class="article-link" target="_blank" rel="noopener">Amazon opens up its global logistics network to all businesses</a></li>
+<li class="article-item"><a href="https://techcrunch.com/2026/05/04/5-days-only-bring-a-partner-or-colleague-and-get-50-off-a-second-techcrunch-disrupt-2026-pass/" class="article-link" target="_blank" rel="noopener">5 days only: Bring a partner or colleague and get 50% off a second TechCrunch Disrupt 2026 pass</a></li>
+<li class="article-item"><a href="https://techcrunch.com/2026/05/04/barocal-can-cool-your-food-and-drink-by-squeezing-a-hunk-of-plastic-crystals/" class="article-link" target="_blank" rel="noopener">Barocal can cool your food and drink by squeezing a hunk of plastic crystals</a></li>
+<li class="article-item"><a href="https://techcrunch.com/2026/05/04/doordash-adds-ai-tools-to-speed-up-merchant-onboarding-edit-photos-of-dishes/" class="article-link" target="_blank" rel="noopener">Doordash adds AI tools to speed up merchant onboarding, edit photos of dishes</a></li>
+<li class="article-item"><a href="https://techcrunch.com/2026/05/04/ousters-new-color-lidar-is-coming-to-replace-cameras/" class="article-link" target="_blank" rel="noopener">Ouster’s new color lidar is coming to replace cameras</a></li>
+<li class="article-item"><a href="https://techcrunch.com/2026/05/04/nicolas-sauvage-is-betting-on-the-boring-parts-of-ai/" class="article-link" target="_blank" rel="noopener">Nicolas Sauvage is betting on the boring parts of AI</a></li>
+<li class="article-item"><a href="https://techcrunch.com/2026/05/03/well-take-it-a-tiktoker-rallies-pledges-to-buy-spirit-airlines-after-its-abrupt-weekend-collapse/" class="article-link" target="_blank" rel="noopener">We’ll take it: a TikToker rallies pledges to buy Spirit Airlines after its abrupt weekend collapse</a></li>
+<li class="article-item"><a href="https://techcrunch.com/2026/05/03/this-is-fine-creator-says-ai-startup-stole-his-art/" class="article-link" target="_blank" rel="noopener">‘This is fine’ creator says AI startup stole his art</a></li>
+<li class="article-item"><a href="https://techcrunch.com/2026/05/03/in-harvard-study-ai-offered-more-accurate-diagnoses-than-emergency-room-doctors/" class="article-link" target="_blank" rel="noopener">In Harvard study, AI offered more accurate emergency room diagnoses than two human doctors</a></li>
+<li class="article-item"><a href="https://techcrunch.com/2026/05/03/techcrunch-mobility-how-do-you-issue-a-ticket-to-a-robotaxi/" class="article-link" target="_blank" rel="noopener">TechCrunch Mobility: How do you issue a ticket to a robotaxi?</a></li>
+</ul>
   </div>
-
-  <div class="section-header">
-    <span class="section-icon">🌍</span>
-    <span class="section-title">Geopolitics</span>
-    <div class="section-line"></div>
+  <div class="source-block">
+    <div class="source-name">The Guardian</div>
+    <ul class="article-list"><li class="article-item"><a href="https://www.theguardian.com/science/2026/may/04/cruise-ship-suspected-hantavirus-outbreak-blocked-docking-cape-verde" class="article-link" target="_blank" rel="noopener">Cruise ship at centre of suspected hantavirus outbreak blocked from docking in Cape Verde</a></li>
+<li class="article-item"><a href="https://www.theguardian.com/global-development/2026/may/04/kenya-ai-healthcare-reforms-driving-up-costs-for-poor" class="article-link" target="_blank" rel="noopener">Flaws in Kenya’s AI-driven health reforms driving up costs for the poorest</a></li>
+<li class="article-item"><a href="https://www.theguardian.com/world/2026/may/03/three-passengers-dead-after-suspected-hantavirus-outbreak-on-cruise-ship" class="article-link" target="_blank" rel="noopener">Three passengers dead after suspected hantavirus outbreak on cruise ship</a></li>
+<li class="article-item"><a href="https://www.theguardian.com/world/2026/may/04/japan-sees-largest-protest-in-support-of-pacifist-constitution-as-pm-takaichi-pushes-revisions" class="article-link" target="_blank" rel="noopener">Japan sees largest protest in support of pacifist constitution as PM Takaichi pushes revisions</a></li>
+<li class="article-item"><a href="https://www.theguardian.com/world/2026/may/04/rare-comet-new-zealand" class="article-link" target="_blank" rel="noopener">Rare comet to flash through New Zealand skies – before it disappears for 170,000 years</a></li>
+<li class="article-item"><a href="https://www.theguardian.com/australia-news/2026/may/05/australias-property-investor-borrowing-rises-at-fastest-rate-in-a-decade-despite-interest-rate-rises" class="article-link" target="_blank" rel="noopener">Australia’s property investor borrowing rises at fastest rate in a decade - despite interest rate rises</a></li>
+<li class="article-item"><a href="https://www.theguardian.com/australia-news/2026/may/04/hecs-student-loan-humanities-students-australia-25-years" class="article-link" target="_blank" rel="noopener">One in four humanities students in Australia to take more than 25 years to pay off student loans, treasury finds</a></li>
+<li class="article-item"><a href="https://www.theguardian.com/australia-news/2026/may/04/albanese-gas-export-tax-asia-energy-trades-fuel-crisis" class="article-link" target="_blank" rel="noopener">Albanese won’t bring in a gas export tax next week – but he’ll struggle to hold off pressure forever</a></li>
+<li class="article-item"><a href="https://www.theguardian.com/australia-news/2026/may/05/nsw-to-criminalise-secret-gps-tracking-after-report-highlighting-number-of-devices-bought-by-dv-offenders" class="article-link" target="_blank" rel="noopener">NSW to criminalise secret GPS tracking after report highlighting number of devices bought by DV offenders</a></li>
+<li class="article-item"><a href="https://www.theguardian.com/environment/2026/may/04/labor-extends-ev-tax-break-cheaper-vehicles-soaring-fuel-prices" class="article-link" target="_blank" rel="noopener">Labor extends EV tax break to encourage cheaper vehicles amid soaring fuel prices</a></li>
+<li class="article-item"><a href="https://www.theguardian.com/environment/2026/may/04/weather-tracker-greece-winds-turkey-rain-bangladesh-storms-central-europe-heat" class="article-link" target="_blank" rel="noopener">Weather tracker: Cold spells in Greece and Turkey, and storms in Bangladesh</a></li>
+<li class="article-item"><a href="https://www.theguardian.com/world/2026/may/04/austria-expels-three-russian-embassy-staff-vienna-suspicion-of-spying" class="article-link" target="_blank" rel="noopener">Austria expels three Russian embassy staff on suspicion of spying</a></li>
+<li class="article-item"><a href="https://www.theguardian.com/world/2026/may/04/europe-must-face-up-to-tensions-with-trump-keir-starmer-says" class="article-link" target="_blank" rel="noopener">Europe must face up to ‘tensions’ with Donald Trump, Keir Starmer says</a></li>
+<li class="article-item"><a href="https://www.theguardian.com/us-news/2026/may/04/marco-rubio-to-meet-pope-leo-after-trumps-broadside-against-pontiff" class="article-link" target="_blank" rel="noopener">Marco Rubio to meet pope this week after Trump’s broadside against Leo</a></li>
+<li class="article-item"><a href="https://www.theguardian.com/world/2026/may/04/france-jean-luc-melenchon-president-bid-2027" class="article-link" target="_blank" rel="noopener">France’s Jean-Luc Mélenchon announces 2027 presidential bid</a></li>
+<li class="article-item"><a href="https://www.theguardian.com/world/live/2026/may/04/iran-war-live-updates-trump-hormuz-us-operation-tanker-strikes" class="article-link" target="_blank" rel="noopener">Middle East crisis live: US denies report that warship trying to pass through strait of Hormuz was hit by Iran</a></li>
+<li class="article-item"><a href="https://www.theguardian.com/world/2026/may/04/iran-executes-men-january-anti-regime-protests" class="article-link" target="_blank" rel="noopener">Iran executes three men in relation to January anti-regime protests</a></li>
+<li class="article-item"><a href="https://www.theguardian.com/world/2026/may/04/shipping-bosses-nervous-trump-plan-to-guide-vessels-strait-of-hormuz-iran" class="article-link" target="_blank" rel="noopener">Iran says ships being ‘guided’ by US through Hormuz must work with its armed forces</a></li>
+<li class="article-item"><a href="https://www.theguardian.com/world/2026/may/04/could-irans-escalating-economic-crisis-weaken-negotiating-position-with-us" class="article-link" target="_blank" rel="noopener">Could Iran’s escalating economic crisis weaken negotiating position with US?</a></li>
+<li class="article-item"><a href="https://www.theguardian.com/world/2026/may/04/syria-justice-assad-regime-arrests-2013-tadamon-massacres" class="article-link" target="_blank" rel="noopener">Security or justice? Syria faces post-Assad reckoning after string of arrests</a></li>
+<li class="article-item"><a href="https://www.theguardian.com/business/2026/may/04/just-eat-couriers-launch-legal-action-improve-workers-rights" class="article-link" target="_blank" rel="noopener">Thousands of Just Eat couriers launch legal action to improve workers’ rights</a></li>
+<li class="article-item"><a href="https://www.theguardian.com/business/2026/may/04/strait-of-hormuz-donald-trump-us-navy-iran-shipping" class="article-link" target="_blank" rel="noopener">Shipping firms question safety in strait of Hormuz despite Trump plan</a></li>
+<li class="article-item"><a href="https://www.theguardian.com/politics/live/2026/may/04/local-election-uk-keir-starmer-ukraine-eu-loan-deal-latest-news-updates" class="article-link" target="_blank" rel="noopener">Reform UK plan to set up migrant detention centres in Green-voting areas condemned by other parties – UK politics live</a></li>
+<li class="article-item"><a href="https://www.theguardian.com/society/2026/may/04/man-produces-sperm-from-testicular-tissue-frozen-as-a-child-in-breakthrough-trial" class="article-link" target="_blank" rel="noopener">Man produces sperm from testicular tissue frozen as a child in breakthrough trial</a></li>
+<li class="article-item"><a href="https://www.theguardian.com/technology/2026/may/04/vine-video-sharing-back-battling-ai-slop-divine" class="article-link" target="_blank" rel="noopener">Vine video-sharing app is back – and battling AI slop</a></li>
+<li class="article-item"><a href="https://www.theguardian.com/us-news/2026/may/04/louisiana-republicans-eliminate-office-democratic-exoneree" class="article-link" target="_blank" rel="noopener">Louisiana Republicans eliminate elected office won by Democratic exoneree</a></li>
+<li class="article-item"><a href="https://www.theguardian.com/us-news/live/2026/may/04/donald-trump-white-house-correspondents-dinner-shooting-cole-allen-rudy-giuliani-hegseth-rubio-iran-us-politics-latest-news-updates" class="article-link" target="_blank" rel="noopener">Hearing for suspect in White House correspondents’ dinner shooting scheduled for today – US politics live</a></li>
+<li class="article-item"><a href="https://www.theguardian.com/us-news/2026/may/04/united-airlines-plane-newark-airport" class="article-link" target="_blank" rel="noopener">Driver injured after truck was struck by United plane landing at Newark airport</a></li>
+<li class="article-item"><a href="https://www.theguardian.com/us-news/2026/may/04/first-thing-trump-says-us-navy-will-guide-trapped-ships-through-strait-of-hormuz" class="article-link" target="_blank" rel="noopener">First Thing: Trump says US navy will ‘guide’ trapped ships through strait of Hormuz</a></li>
+<li class="article-item"><a href="https://www.theguardian.com/us-news/2026/may/04/edmond-oklahoma-mass-shooting" class="article-link" target="_blank" rel="noopener">At least 13 hurt in shooting at Oklahoma campground party</a></li>
+</ul>
   </div>
-  <div class="card-grid">
-    <div class="card featured ">
-      <div class="featured-body">
-        <div class="featured-label" style="color:#0F3D91;">Top Story</div>
-        <div class="card-top">
-          <a href="https://www.theguardian.com/world/live/2026/may/04/iran-war-live-updates-trump-hormuz-us-operation-tanker-strikes" class="card-headline" target="_blank" rel="noopener" style="">Middle East crisis live: Iran warns it will attack US forces if they enter strait of Hormuz after Trump says US will help ‘guide’ stranded ships</a>
-          <div class="card-badges"><span class="badge badge-source">The Guardian</span> <span class="badge badge-score-high">10</span></div>
-        </div>
-        <div class="card-summary">Geopolitical tensions are escalating in the Middle East, with Iran threatening military action against US forces in the Strait of Hormuz after former President Trump indicated US intervention to guide stranded ships. This developing situation highlights potential risks to global supply chains and energy security, which could have significant implications for macroeconomics and market stability, requiring strategic awareness in your role.</div>
-        <div class="card-footer"></div>
-      </div>
-    </div>
-    <div class="card ">
-      <div class="card-top">
-        <a href="https://timesofindia.indiatimes.com/technology/tech-news/as-many-say-software-is-dead-amazon-web-services-ceo-matt-garman-calls-it-a-huge-/articleshow/130741418.cms" class="card-headline" target="_blank" rel="noopener">As many say software is dead, Amazon Web Services CEO calls it a &#x27;huge business opportunity’</a>
-        <div class="card-badges"><span class="badge badge-source">Times of India</span> <span class="badge badge-score-high">10</span></div>
-      </div>
-      <div class="card-summary">AWS CEO Matt Garman dismisses the &#x27;SaaSpocalypse&#x27; narrative, instead positioning the AI-driven shift as a major business opportunity for software companies. He highlights the rise of agentic AI reshaping work and announces new AI-powered productivity tools like the Quick desktop app, offering key insights into AWS&#x27;s strategic direction and product development relevant to your AI GTM strategy in devtools.</div>
-      <div class="card-footer"></div>
-    </div>
-    <div class="card ">
-      <div class="card-top">
-        <a href="https://www.theguardian.com/global-development/2026/may/04/kenya-ai-healthcare-reforms-driving-up-costs-for-poor" class="card-headline" target="_blank" rel="noopener">Flaws in Kenya’s AI-driven health reforms driving up costs for the poorest</a>
-        <div class="card-badges"><span class="badge badge-source">The Guardian</span> <span class="badge badge-score-high">9</span></div>
-      </div>
-      <div class="card-summary">An investigation by The Guardian reveals that an AI system used to determine healthcare affordability in Kenya has inadvertently driven up costs for the poorest citizens, contradicting the government&#x27;s goal of universal access. This case provides crucial lessons for AI product leaders on the ethical considerations, potential biases, and socio-economic impacts of deploying AI at scale in sensitive sectors, informing robust GTM strategies that prioritize equitable outcomes.</div>
-      <div class="card-footer"></div>
-    </div>
-    <div class="card ">
-      <div class="card-top">
-        <a href="https://www.theguardian.com/world/2026/may/03/canada-first-non-european-nation-epc-summit-mark-carney-allies-trump" class="card-headline" target="_blank" rel="noopener">Canada to be first non-European nation at EPC summit as Carney seeks allies</a>
-        <div class="card-badges"><span class="badge badge-source">The Guardian</span> <span class="badge badge-score-high">9</span></div>
-      </div>
-      <div class="card-summary">This article highlights Canada&#x27;s significant diplomatic move to become the first non-European nation to join the European Political Community summit, signaling an effort to forge new alliances and build ties, particularly in the wake of perceived shifts in US relations. For a strategy professional, this provides crucial context on evolving global geopolitical landscapes and alliance strategies among nations, which can influence international business and market conditions.</div>
-      <div class="card-footer"></div>
-    </div>
-    <div class="card ">
-      <div class="card-top">
-        <a href="https://www.theguardian.com/world/2026/may/04/japan-sees-largest-protest-in-support-of-pacifist-constitution-as-pm-takaichi-pushes-revisions" class="card-headline" target="_blank" rel="noopener">Japan sees largest protest in support of pacifist constitution as PM Takaichi pushes revisions</a>
-        <div class="card-badges"><span class="badge badge-source">The Guardian</span> <span class="badge badge-score-high">9</span></div>
-      </div>
-      <div class="card-summary">This article details widespread protests in Japan against Prime Minister Takaichi&#x27;s efforts to revise the country&#x27;s pacifist constitution. For a strategy professional, this development is crucial for understanding potential shifts in East Asian geopolitics, Japan&#x27;s evolving security posture, and the broader implications for international relations and global power dynamics.</div>
-      <div class="card-footer"></div>
-    </div>
-    <div class="card ">
-      <div class="card-top">
-        <a href="https://www.theguardian.com/australia-news/live/2026/may/04/australia-news-live-jim-chalmers-budget-inflation-labor-cost-of-living-interest-rates-bondi-shooting-royal-commission-antisemitism-ntwnfb" class="card-headline" target="_blank" rel="noopener">Australia and Japan commit to ‘support the flow’ of energy – as it happened</a>
-        <div class="card-badges"><span class="badge badge-source">The Guardian</span> <span class="badge badge-score-high">9</span></div>
-      </div>
-      <div class="card-summary">This article details Australia and Japan&#x27;s commitment to energy flow stability and discusses Australia&#x27;s domestic fuel tax policy in the context of volatile global oil prices, heavily influenced by ongoing geopolitical conflicts like the US-Israel war on Iran. It provides crucial insights into international energy security strategies and macroeconomic responses to global events, relevant for understanding the broader business and political landscape.</div>
-      <div class="card-footer"></div>
-    </div>
-    <div class="card ">
-      <div class="card-top">
-        <a href="https://www.theguardian.com/world/2026/may/04/eu-closer-ties-armenia-counter-russian-interference" class="card-headline" target="_blank" rel="noopener">EU forging closer ties with Armenia as it sends experts to help counter Russian interference</a>
-        <div class="card-badges"><span class="badge badge-source">The Guardian</span> <span class="badge badge-score-high">9</span></div>
-      </div>
-      <div class="card-summary">The EU is deepening its strategic relationship with Armenia, a former Soviet republic, by hosting a summit and sending experts to combat Russian interference. This development signals a significant geopolitical pivot in the region, as the EU actively counters Russian influence and potentially reshapes regional alliances and power dynamics.</div>
-      <div class="card-footer"></div>
-    </div>
-    <div class="card ">
-      <div class="card-top">
-        <a href="https://www.theguardian.com/world/2026/may/03/merz-not-giving-up-on-working-with-trump-despite-iran-war-spat" class="card-headline" target="_blank" rel="noopener">Merz ‘not giving up on working with Trump’ despite Iran war spat</a>
-        <div class="card-badges"><span class="badge badge-source">The Guardian</span> <span class="badge badge-score-high">9</span></div>
-      </div>
-      <div class="card-summary">German Chancellor Friedrich Merz is reportedly committed to working with US President Donald Trump, despite a public disagreement over the ongoing war in Iran. This development highlights the complex dynamics of international alliances and potential shifts in global stability, which could influence macroeconomics and strategic planning for a devtools company operating internationally.</div>
-      <div class="card-footer"></div>
-    </div>
-    <div class="card ">
-      <div class="card-top">
-        <a href="https://www.theguardian.com/world/2026/may/03/gaza-flotilla-activists-spain-brazil-appear-israel-court" class="card-headline" target="_blank" rel="noopener">Spain demands release of Gaza flotilla activists ‘held illegally’ by Israel</a>
-        <div class="card-badges"><span class="badge badge-source">The Guardian</span> <span class="badge badge-score-high">9</span></div>
-      </div>
-      <div class="card-summary">Spain&#x27;s foreign ministry has demanded the immediate release of its nationals, citing illegal detention by Israel following the interception of a Gaza-bound flotilla near Crete. This incident highlights ongoing tensions and diplomatic challenges within the complex geopolitical landscape of the Middle East, potentially impacting international relations and humanitarian efforts.</div>
-      <div class="card-footer"></div>
-    </div>
-    <div class="card ">
-      <div class="card-top">
-        <a href="https://www.theguardian.com/world/2026/may/04/could-irans-escalating-economic-crisis-weaken-negotiating-position-with-us" class="card-headline" target="_blank" rel="noopener">Could Iran’s escalating economic crisis weaken negotiating position with US?</a>
-        <div class="card-badges"><span class="badge badge-source">The Guardian</span> <span class="badge badge-score-high">9</span></div>
-      </div>
-      <div class="card-summary">This article explores how Iran&#x27;s severe economic crisis, driven by war damages, high inflation, and currency devaluation, is significantly eroding its negotiating leverage with the US, potentially forcing a more conciliatory geopolitical stance. For a strategy professional, this provides a compelling case study on how critical macroeconomic instability can directly impact a nation&#x27;s strategic flexibility and international bargaining power on the global stage.</div>
-      <div class="card-footer"></div>
-    </div>
-    <div class="card ">
-      <div class="card-top">
-        <a href="https://www.theguardian.com/world/2026/may/04/syria-justice-assad-regime-arrests-2013-tadamon-massacres" class="card-headline" target="_blank" rel="noopener">Security or justice? Syria faces post-Assad reckoning after string of arrests</a>
-        <div class="card-badges"><span class="badge badge-source">The Guardian</span> <span class="badge badge-score-high">9</span></div>
-      </div>
-      <div class="card-summary">This piece examines the complex aftermath of the Syrian conflict, focusing on the new government&#x27;s approach to justice and accountability, particularly concerning arrests related to the 2013 Tadamon massacres. It highlights accusations of &#x27;performative justice&#x27; and deals with suspects, illustrating the difficult balance between national security and holding individuals accountable for past atrocities. This offers insight into geopolitical stability and the challenges of transitional justice in conflict-affected regions.</div>
-      <div class="card-footer"></div>
-    </div>
-    <div class="card ">
-      <div class="card-top">
-        <a href="https://economictimes.indiatimes.com/markets/expert-view/markets-may-be-approaching-near-term-exhaustion-after-strong-rally-rohit-srivastava/articleshow/130773427.cms" class="card-headline" target="_blank" rel="noopener">Markets may be approaching near-term exhaustion after strong rally: Rohit Srivastava</a>
-        <div class="card-badges"><span class="badge badge-source">Economic Times</span> <span class="badge badge-score-high">9</span></div>
-      </div>
-      <div class="card-summary">Indian stock markets are showing signs of slowing momentum after a strong rally, with experts advising caution despite an overall uptrend. The Nifty faces key resistance, while the real estate sector is identified as an early turnaround success, offering insights into market dynamics relevant for broader strategic awareness.</div>
-      <div class="card-footer"></div>
-    </div>
-    <div class="card ">
-      <div class="card-top">
-        <a href="https://economictimes.indiatimes.com/news/international/world-news/hezbollah-pays-steep-price-in-battle-to-reverse-its-fortunes/articleshow/130731149.cms" class="card-headline" target="_blank" rel="noopener">Hezbollah pays steep price in battle to reverse its fortunes</a>
-        <div class="card-badges"><span class="badge badge-source">Economic Times</span> <span class="badge badge-score-high">9</span></div>
-      </div>
-      <div class="card-summary">Hezbollah is experiencing considerable strategic and territorial losses in its ongoing conflict with Israel, despite aiming to leverage its alliance with Iran for regional influence. This situation, alongside Lebanon&#x27;s government pursuing direct talks with Israel, signals evolving geopolitical dynamics in the Middle East that can impact global stability and international relations.</div>
-      <div class="card-footer"></div>
-    </div>
-    <div class="card ">
-      <div class="card-top">
-        <a href="https://www.theguardian.com/world/2026/may/03/trump-says-iran-has-not-yet-paid-a-big-enough-price-as-he-reviews-new-peace-proposal" class="card-headline" target="_blank" rel="noopener">Trump says US navy will ‘guide’ trapped ships from strait of Hormuz amid ‘very positive’ talks with Iran</a>
-        <div class="card-badges"><span class="badge badge-source">The Guardian</span> <span class="badge badge-score-high">8</span></div>
-      </div>
-      <div class="card-summary">Donald Trump announced that the US Navy would guide ships through the Strait of Hormuz following purported positive talks with Iran, amid prior mixed signals regarding the conflict. For a strategy professional, this development highlights ongoing geopolitical tensions in a critical global trade chokepoint, which could impact global supply chains, energy prices, and overall economic stability relevant for strategic planning.</div>
-      <div class="card-footer"></div>
-    </div>
-    <div class="card ">
-      <div class="card-top">
-        <a href="https://www.theguardian.com/politics/live/2026/may/04/local-election-uk-keir-starmer-ukraine-eu-loan-deal-latest-news-updates" class="card-headline" target="_blank" rel="noopener">Tories accuse Starmer of ‘undemocratic hit job’ after report the UK could pay £1bn to access EU single market – UK politics live</a>
-        <div class="card-badges"><span class="badge badge-source">The Guardian</span> <span class="badge badge-score-high">8</span></div>
-      </div>
-      <div class="card-summary">This article highlights ongoing political discussions in the UK regarding potential payments of £1bn to access the EU single market and the UK&#x27;s participation in the EU&#x27;s €90bn loan for Ukraine. These developments signal shifts in UK-EU relations and have potential macroeconomic implications for trade and international financial flows, relevant for understanding the broader geopolitical and economic landscape.</div>
-      <div class="card-footer"></div>
-    </div>
-    <div class="card ">
-      <div class="card-top">
-        <a href="https://economictimes.indiatimes.com/markets/stocks/news/west-bengal-assam-among-5-state-election-results-today-10-things-stock-market-investors-should-track-under-volatility/articleshow/130742547.cms" class="card-headline" target="_blank" rel="noopener">West Bengal, Assam among 5 state election results today. 10 things stock market investors should track under volatility</a>
-        <div class="card-badges"><span class="badge badge-source">Economic Times</span> <span class="badge badge-score-high">8</span></div>
-      </div>
-      <div class="card-summary">This Economic Times article details the ongoing vote counting for five state assembly elections in India, including West Bengal and Assam, and advises stock market investors on navigating anticipated volatility. It highlights the importance of tracking broader macroeconomic signals as early trends emerge, providing timely insights into domestic political events influencing financial markets.</div>
-      <div class="card-footer"></div>
-    </div>
+  <div class="source-block">
+    <div class="source-name">Economic Times</div>
+    <ul class="article-list"><li class="article-item"><a href="https://economictimes.indiatimes.com/markets/stocks/news/short-covering-fuels-april-rally-stock-specific-action-to-continue-in-may/articleshow/130742199.cms" class="article-link" target="_blank" rel="noopener">Short covering fuels April rally, stock-specific action to continue in May</a></li>
+<li class="article-item"><a href="https://economictimes.indiatimes.com/markets/stocks/news/west-bengal-assam-among-5-state-election-results-today-10-things-stock-market-investors-should-track-under-volatility/articleshow/130742547.cms" class="article-link" target="_blank" rel="noopener">West Bengal, Assam among 5 state election results today. 10 things stock market investors should track under volatility</a></li>
+<li class="article-item"><a href="https://economictimes.indiatimes.com/markets/stocks/news/pharma-q4-outlook-mixed-hospitals-steady-generics-face-revlimid-drag/articleshow/130742088.cms" class="article-link" target="_blank" rel="noopener">Pharma Q4 outlook mixed: Hospitals steady, generics face revlimid drag</a></li>
+<li class="article-item"><a href="https://economictimes.indiatimes.com/markets/stocks/news/resurgent-in-april-can-bulls-defy-sell-in-may-maxim/articleshow/130741765.cms" class="article-link" target="_blank" rel="noopener">Resurgent in April, can bulls defy &#x27;Sell in May&#x27; maxim?</a></li>
+<li class="article-item"><a href="https://economictimes.indiatimes.com/markets/expert-view/markets-may-be-approaching-near-term-exhaustion-after-strong-rally-rohit-srivastava/articleshow/130773427.cms" class="article-link" target="_blank" rel="noopener">Markets may be approaching near-term exhaustion after strong rally: Rohit Srivastava</a></li>
+<li class="article-item"><a href="https://economictimes.indiatimes.com/markets/expert-view/markets-likely-near-bottom-range-stay-invested-devina-mehra/articleshow/130767034.cms" class="article-link" target="_blank" rel="noopener">Markets likely near bottom range; stay invested: Devina Mehra</a></li>
+</ul>
   </div>
-  <div class="section-header">
-    <span class="section-icon">📈</span>
-    <span class="section-title">Business &amp; Markets</span>
-    <div class="section-line"></div>
+  <div class="source-block">
+    <div class="source-name">Times of India</div>
+    <ul class="article-list"><li class="article-item"><a href="https://timesofindia.indiatimes.com/india/lotus-now-blooms-from-gangotri-to-ganga-sagar-pm-modi-lauds-historic-bjp-win-in-bengal/articleshow/130804422.cms" class="article-link" target="_blank" rel="noopener">&#x27;Lotus now blooms from Gangotri to Ganga Sagar&#x27;: PM Modi lauds historic BJP win in Bengal</a></li>
+<li class="article-item"><a href="https://timesofindia.indiatimes.com/india/pm-modi-dons-traditional-bengali-panjabi-and-dhuti-as-bjp-marks-historic-west-bengal-win/articleshow/130804351.cms" class="article-link" target="_blank" rel="noopener">PM Modi dons traditional Bengali panjabi and dhuti as BJP marks historic West Bengal win</a></li>
+<li class="article-item"><a href="https://timesofindia.indiatimes.com/india/kerala-assembly-election-results-2026-left-leaves-india-keralas-pendulum-swings-away-from-ldf-after-a-decade-udf-ldf-bjp-congress/articleshow/130796097.cms" class="article-link" target="_blank" rel="noopener">Left leaves India: Kerala&#x27;s pendulum swings away from LDF after a decade</a></li>
+<li class="article-item"><a href="https://timesofindia.indiatimes.com/india/who-is-tvks-vs-babu-king-slayer-who-defeated-dmks-stalin-in-tamil-nadus-kolathur/articleshow/130804811.cms" class="article-link" target="_blank" rel="noopener">Who is TVK&#x27;s VS Babu? King slayer who defeated DMK&#x27;s Stalin in Tamil Nadu&#x27;s Kolathur</a></li>
+<li class="article-item"><a href="https://timesofindia.indiatimes.com/technology/tech-news/as-many-say-software-is-dead-amazon-web-services-ceo-matt-garman-calls-it-a-huge-/articleshow/130741418.cms" class="article-link" target="_blank" rel="noopener">As many say software is dead, Amazon Web Services CEO calls it a &#x27;huge business opportunity’</a></li>
+<li class="article-item"><a href="https://timesofindia.indiatimes.com/sports/cricket/ipl/ipl-2026/ipl-2026-nicholas-pooran-surpasses-vaibhav-sooryavanshi-in-explosive-batting-record-during-mi-vs-lsg/articleshow/130803196.cms" class="article-link" target="_blank" rel="noopener">Pooran surpasses Sooryavanshi in explosive batting record</a></li>
+<li class="article-item"><a href="https://timesofindia.indiatimes.com/india/election-results-2026-how-himanta-biswa-sarma-demolished-the-3gs-and-built-a-bjp-fortress-in-assam/articleshow/130804565.cms" class="article-link" target="_blank" rel="noopener">How Himanta Biswa Sarma demolished the &#x27;3Gs&#x27; and built a BJP fortress in Assam</a></li>
+<li class="article-item"><a href="https://timesofindia.indiatimes.com/india/from-bengal-shock-to-tamil-nadu-surprise-time-for-exit-polls-to-exit/articleshow/130802801.cms" class="article-link" target="_blank" rel="noopener">From Bengal shock to Tamil Nadu surprise: Time for exit polls to exit?</a></li>
+<li class="article-item"><a href="https://timesofindia.indiatimes.com/india/assembly-election-results-2026-vijay-wave-bengal-breakthrough-kerala-reset-10-takeaways/articleshow/130801326.cms" class="article-link" target="_blank" rel="noopener">Assembly election results 2026: Vijay wave, Bengal breakthrough, Kerala reset - 10 takeaways</a></li>
+<li class="article-item"><a href="https://timesofindia.indiatimes.com/india/tamil-nadu-election-results-2026-full-list-of-winners-and-losers-from-tvk-dmk-aiadmk/articleshow/130763720.cms" class="article-link" target="_blank" rel="noopener">TVK shakes up Tamil Nadu: Vijay’s debutant party surges past DMK, AIADMK; full list of winners</a></li>
+<li class="article-item"><a href="https://timesofindia.indiatimes.com/india/kerala-assembly-election-results-2026-kc-venugopal-vd-satheesan-ramesh-chennithala-or-shashi-tharoor-who-would-be-kerala-cm-udf/articleshow/130784245.cms" class="article-link" target="_blank" rel="noopener">Tharoor, Venugopal or Satheesan? Cong&#x27;s CM dilemma in Kerala after big win</a></li>
+<li class="article-item"><a href="https://timesofindia.indiatimes.com/india/tamil-nadu-election-results-shocker-5-factors-that-powered-tvk-vijays-political-blockbuster/articleshow/130789543.cms" class="article-link" target="_blank" rel="noopener">Tamil Nadu shocker: 5 factors that powered TVK Vijay&#x27;s political blockbuster</a></li>
+<li class="article-item"><a href="https://timesofindia.indiatimes.com/sports/cricket/ipl/ipl-2026/why-is-hardik-pandya-is-not-playing-in-mi-vs-lsg-ipl-2026-match/articleshow/130803678.cms" class="article-link" target="_blank" rel="noopener">Why Hardik Pandya is not playing in MI vs LSG IPL 2026 match</a></li>
+<li class="article-item"><a href="https://timesofindia.indiatimes.com/entertainment/english/hollywood/news/heath-ledgers-daughter-matilda-inherited-entire-16-3m-estate-despite-not-being-named-in-original-will/articleshow/130750425.cms" class="article-link" target="_blank" rel="noopener">Why Heath Ledger’s estate didn’t list daughter Matilda Ledger</a></li>
+<li class="article-item"><a href="https://timesofindia.indiatimes.com/india/tvk-storms-tamil-nadu-eclipses-dmk-and-aiadmk-but-falls-short-of-majority-what-next-for-vijay/articleshow/130789686.cms" class="article-link" target="_blank" rel="noopener">TVK storms Tamil Nadu but falls short of majority: Who will Vijay ally with?</a></li>
+<li class="article-item"><a href="https://timesofindia.indiatimes.com/india/kerala-election-results-2026-full-list-of-winners-and-losers-congress-led-udf-set-for-historic-comeback-ldf-pinarayi-vijayan/articleshow/130780992.cms" class="article-link" target="_blank" rel="noopener">Kerala Election Results 2026: Full list of winners and losers; Congress-led UDF set for comeback</a></li>
+<li class="article-item"><a href="https://timesofindia.indiatimes.com/sports/tennis/top-stories/manas-dhamne-takes-confidence-from-first-atp-challenger-final-run-and-learnings-for-the-future/articleshow/130796415.cms" class="article-link" target="_blank" rel="noopener">Dhamne takes &#x27;confidence&#x27; from first ATP Challenger final run</a></li>
+<li class="article-item"><a href="https://timesofindia.indiatimes.com/india/bjp-winners-list-in-west-bengal-election-2026-full-constituency-wise-results/articleshow/130785504.cms" class="article-link" target="_blank" rel="noopener">BJP winners list in West Bengal Election 2026: Full constituency-wise results</a></li>
+<li class="article-item"><a href="https://timesofindia.indiatimes.com/sports/cricket/ipl/ipl-2026/ipl-2026-rohit-sharmas-heartfelt-gesture-steals-show-after-accidental-hit-on-ground-staff/articleshow/130785471.cms" class="article-link" target="_blank" rel="noopener">Rohit Sharma’s heartfelt gesture steals show after accidental hit on ground staff</a></li>
+<li class="article-item"><a href="https://timesofindia.indiatimes.com/india/assembly-election-results-2026-top-10-winners-and-losers-west-bengal-tvk-vijay-tamil-nadu-assam-kerala-vijayan-mamata-puducherry/articleshow/130776095.cms" class="article-link" target="_blank" rel="noopener">Assembly election results 2026: Top 10 winners and losers</a></li>
+<li class="article-item"><a href="https://timesofindia.indiatimes.com/india/kerala-assembly-election-results-congress-led-udf-set-for-a-massive-comeback-5-reasons-behind-its-return-after-a-decade/articleshow/130778217.cms" class="article-link" target="_blank" rel="noopener">Kerala poll results: 5 reasons behind UDF&#x27;s roaring comback</a></li>
+<li class="article-item"><a href="https://timesofindia.indiatimes.com/india/tami-nadu-west-bengal-kerala-vote-for-change-how-vijays-tvk-bjp-congress-led-udf-turned-the-tide/articleshow/130764928.cms" class="article-link" target="_blank" rel="noopener">3 states vote for change: How TVK, BJP &amp;amp; Congress-led UDF turned the tide</a></li>
+<li class="article-item"><a href="https://timesofindia.indiatimes.com/sports/cricket/ipl/ipl-2026/ill-send-a-private-plane-mark-wood-amused-by-bizarre-ipl-offer-during-illness/articleshow/130780928.cms" class="article-link" target="_blank" rel="noopener">‘I’ll send a private plane!’: Mark Wood amused by bizarre IPL offer during illness</a></li>
+<li class="article-item"><a href="https://timesofindia.indiatimes.com/india/no-need-to-be-afraid-mamata-to-tmc-counting-agents-assures-win-after-sunset/articleshow/130767365.cms" class="article-link" target="_blank" rel="noopener">&#x27;No need to be afraid&#x27;: Mamata to TMC counting agents; assures &#x27;win after sunset&#x27;</a></li>
+<li class="article-item"><a href="https://timesofindia.indiatimes.com/india/west-bengal-election-2026-rg-kar-victims-mother-bjp-candidate-ratna-debnath-leads-from-panihati/articleshow/130764793.cms" class="article-link" target="_blank" rel="noopener">RG Kar victim’s mother, BJP candidate Ratna Debnath leads from Panihati</a></li>
+<li class="article-item"><a href="https://timesofindia.indiatimes.com/sports/cricket/ipl/ipl-2026/ipl-2026-bad-news-for-csk-ms-dhoni-skips-delhi-trip-as-injury-delays-return/articleshow/130778792.cms" class="article-link" target="_blank" rel="noopener">IPL 2026: Bad news for CSK! MS Dhoni skips Delhi trip as injury delays return</a></li>
+<li class="article-item"><a href="https://timesofindia.indiatimes.com/sports/cricket/news/psl-babar-azams-rohit-sharma-inspired-walk-celebration-goes-wrong-sparks-meme-storm-watch/articleshow/130773788.cms" class="article-link" target="_blank" rel="noopener">PSL: Babar Azam&#x27;s Rohit Sharma-inspired &#x27;walk&#x27; celebration goes wrong</a></li>
+<li class="article-item"><a href="https://timesofindia.indiatimes.com/india/they-cheated-people-humayun-kabir-congratulates-west-bengal-for-defeating-tmc/articleshow/130774296.cms" class="article-link" target="_blank" rel="noopener">&#x27;They cheated people&#x27;: Humayun Kabir congratulates West Bengal for defeating TMC</a></li>
+<li class="article-item"><a href="https://timesofindia.indiatimes.com/india/vijays-tvk-party-emerges-as-formidable-force-in-tamil-nadu-all-you-need-to-know-about-its-journey/articleshow/130757706.cms" class="article-link" target="_blank" rel="noopener">Vijay’s TVK party emerges as formidable force in Tamil Nadu; all you need to know about its journey</a></li>
+<li class="article-item"><a href="https://timesofindia.indiatimes.com/sports/cricket/ipl/ipl-2026/ipl-2026-watching-virat-you-understand-the-art-of-batting-jacob-bethell-on-kohlis-impact-at-rcb/articleshow/130772474.cms" class="article-link" target="_blank" rel="noopener">‘Watching Virat, you understand the art of batting’: RCB star on Kohli’s impact</a></li>
+<li class="article-item"><a href="https://timesofindia.indiatimes.com/india/west-bengal-assembly-election-results-2026-the-colour-changes-the-argument-remains/articleshow/130763332.cms" class="article-link" target="_blank" rel="noopener">West Bengal Assembly Election Results 2026: The colour changes, the argument remains</a></li>
+<li class="article-item"><a href="https://timesofindia.indiatimes.com/india/west-bengal-election-results-bjp-makes-gains-in-tmc-strongholds-including-muslim-belts-leads-in-over-80-seats/articleshow/130764469.cms" class="article-link" target="_blank" rel="noopener">Bengal results: BJP makes gains in TMC strongholds, including Muslim belts; leads in over 80 seats</a></li>
+</ul>
   </div>
-  <div class="card-grid">
-    <div class="card featured ">
-      <div class="featured-body">
-        <div class="featured-label" style="color:#0F3D91;">Top Story</div>
-        <div class="card-top">
-          <a href="https://techcrunch.com/2026/05/04/nicolas-sauvage-is-betting-on-the-boring-parts-of-ai/" class="card-headline" target="_blank" rel="noopener" style="">Nicolas Sauvage is betting on the boring parts of AI</a>
-          <div class="card-badges"><span class="badge badge-source">TechCrunch</span> <span class="badge badge-score-high">9</span></div>
-        </div>
-        <div class="card-summary">This article highlights Nicolas Sauvage&#x27;s investment strategy in the &#x27;boring parts of AI,&#x27; covering foundational technologies that have recently garnered significant VC interest. For a strategy professional leading AI GTM, this provides valuable insight into emerging yet critical AI market trends and strategic investment shifts, which can inform product strategy and market positioning within the devtools ecosystem.</div>
-        <div class="card-footer"></div>
-      </div>
-    </div>
-    <div class="card ">
-      <div class="card-top">
-        <a href="https://techcrunch.com/2026/05/03/this-is-fine-creator-says-ai-startup-stole-his-art/" class="card-headline" target="_blank" rel="noopener">‘This is fine’ creator says AI startup stole his art</a>
-        <div class="card-badges"><span class="badge badge-source">TechCrunch</span> <span class="badge badge-score-high">8</span></div>
-      </div>
-      <div class="card-summary">An AI startup named Artisan, known for its provocative &#x27;stop hiring humans&#x27; billboards, is accused by the creator of the &#x27;This is fine&#x27; meme of using his copyrighted art without permission. This incident highlights critical ethical and intellectual property issues within the AI industry, which are crucial considerations for anyone involved in AI product development and Go-to-Market strategy due to potential reputational and legal risks.</div>
-      <div class="card-footer"></div>
-    </div>
-    <div class="card ">
-      <div class="card-top">
-        <a href="https://techcrunch.com/2026/05/03/in-harvard-study-ai-offered-more-accurate-diagnoses-than-emergency-room-doctors/" class="card-headline" target="_blank" rel="noopener">In Harvard study, AI offered more accurate emergency room diagnoses than two human doctors</a>
-        <div class="card-badges"><span class="badge badge-source">TechCrunch</span> <span class="badge badge-score-high">8</span></div>
-      </div>
-      <div class="card-summary">A Harvard study reveals that large language models delivered more accurate emergency room diagnoses than two human doctors, showcasing significant advancements in AI&#x27;s practical capabilities. For an AI GTM strategist, this underscores the increasing sophistication and real-world applicability of AI, influencing market perception, adoption strategies, and the potential for AI integration across various enterprise solutions.</div>
-      <div class="card-footer"></div>
-    </div>
-  </div>
-  <div class="section-header">
-    <span class="section-icon">⚡</span>
-    <span class="section-title">Tech Trends</span>
-    <div class="section-line"></div>
-  </div>
-  <div class="card-grid">
-    <div class="card featured ">
-      <div class="featured-body">
-        <div class="featured-label" style="color:#0F3D91;">Top Story</div>
-        <div class="card-top">
-          <a href="https://techcrunch.com/2026/05/03/techcrunch-mobility-how-do-you-issue-a-ticket-to-a-robotaxi/" class="card-headline" target="_blank" rel="noopener" style="">TechCrunch Mobility: How do you issue a ticket to a robotaxi?</a>
-          <div class="card-badges"><span class="badge badge-source">TechCrunch</span> <span class="badge badge-score-high">8</span></div>
-        </div>
-        <div class="card-summary">This TechCrunch Mobility piece delves into the practicalities of advanced AI product deployment, specifically addressing the novel challenge of issuing tickets to robotaxis and determining accountability. For an AI GTM strategy leader, this highlights critical operational and regulatory hurdles that companies must navigate when bringing AI-powered services into complex real-world environments, extending beyond core product development to encompass societal integration and legal frameworks.</div>
-        <div class="card-footer"></div>
-      </div>
-    </div>
-  </div>
-
-  <hr class="big-divider">
-  <div class="big-section culture">
-    <span class="big-section-num">02</span>
-    <span class="big-section-title">Art, Culture &amp; Lifestyle</span>
-    <span class="big-section-desc">Entertainment · Arts · Living</span>
-  </div>
-  
-  <div class="section-header">
-    <span class="section-icon">🎨</span>
-    <span class="section-title">Entertainment &amp; Arts</span>
-    <div class="section-line"></div>
-  </div>
-  <div class="card-grid">
-    <div class="card culture-card">
-      <div class="card-top">
-        <a href="https://www.theguardian.com/artanddesign/2026/may/04/the-last-resident-of-casa-mila-on-life-in-gaudis-masterwork" class="card-headline" target="_blank" rel="noopener">‘It’s a world heritage site, but it’s my home’: the last resident of Casa Milà on life in Gaudí’s masterwork</a>
-        <div class="card-badges"><span class="badge badge-culture">The Guardian</span> <span class="badge badge-score-high">7</span></div>
-      </div>
-      <div class="card-summary">This piece offers a captivating look into the life of Ana Viladomiu, the last resident of Barcelona&#x27;s Casa Milà, a Gaudí-designed world heritage site. It details her nearly 40-year experience inhabiting a culturally significant and now highly revered building that was once controversial.</div>
-      <div class="card-footer"></div>
-    </div>
-    <div class="card culture-card">
-      <div class="card-top">
-        <a href="https://www.theguardian.com/world/2026/may/04/rare-comet-new-zealand" class="card-headline" target="_blank" rel="noopener">Rare comet to flash through New Zealand skies – before it disappears for 170,000 years</a>
-        <div class="card-badges"><span class="badge badge-culture">The Guardian</span> <span class="badge badge-score-mid">6</span></div>
-      </div>
-      <div class="card-summary">Stargazers in New Zealand have a rare two-week window to observe comet C/2025 R3 PanSTARRS, a distinctive blue-green orb appearing from the solar system&#x27;s edges before it vanishes for 170,000 years. This offers a unique opportunity for a moment of cosmic wonder, aligning with your broader interests in culture and natural phenomena.</div>
-      <div class="card-footer"></div>
-    </div>
-    <div class="card culture-card">
-      <div class="card-top">
-        <a href="https://techcrunch.com/2026/05/03/well-take-it-a-tiktoker-rallies-pledges-to-buy-spirit-airlines-after-its-abrupt-weekend-collapse/" class="card-headline" target="_blank" rel="noopener">We’ll take it: a TikToker rallies pledges to buy Spirit Airlines after its abrupt weekend collapse</a>
-        <div class="card-badges"><span class="badge badge-culture">TechCrunch</span> <span class="badge badge-score-mid">5</span></div>
-      </div>
-      <div class="card-summary">This article details a unique event where a TikToker successfully rallied tens of thousands of individuals to pledge nearly $23 million to buy Spirit Airlines, following the company&#x27;s operational collapse. It serves as an unconventional case study in how social media can mobilize consumer sentiment and create crowd-sourced initiatives, offering insights into internet culture intersecting with market reactions.</div>
-      <div class="card-footer"></div>
-    </div>
-    <div class="card culture-card">
-      <div class="card-top">
-        <a href="https://www.theguardian.com/film/2026/may/04/the-devil-wears-prada-2-box-office-opening-weekend" class="card-headline" target="_blank" rel="noopener">The Devil Wears Prada 2 struts to stunning $233m opening weekend at box office</a>
-        <div class="card-badges"><span class="badge badge-culture">The Guardian</span> <span class="badge badge-score-mid">5</span></div>
-      </div>
-      <div class="card-summary">The sequel to The Devil Wears Prada achieved an impressive $233 million opening weekend worldwide, leading summer box office numbers and marking a significant commercial success for a female-skewing film, while also setting a new record for Meryl Streep&#x27;s career.</div>
-      <div class="card-footer"></div>
-    </div></div>
-
-
   <div class="archive-bar">
     <a href="2026-05-03.html">← 2026-05-03</a>
     <span>|</span>
@@ -376,7 +165,7 @@ main { max-width: 960px; margin: 0 auto; padding: 28px 16px 60px; }
     <span>|</span>
     <span style="color:#ccc;">Next →</span>
   </div>
-
 </main>
+
 </body>
 </html>
