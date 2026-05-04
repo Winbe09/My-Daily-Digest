@@ -101,33 +101,10 @@ NEWSLETTER_SOURCES = [
 ]
 
 # -----------------------------------------------------------------------------
-# TRENDING SIGNAL SOURCES
-# Used only for scoring enrichment — not as direct article sources
+# DEDUPLICATION
+# Articles with title cosine similarity above this threshold are merged
 # -----------------------------------------------------------------------------
-REDDIT_SUBREDDITS = []
-
-# Hacker News: top N stories fetched
-HN_STORY_LIMIT = 30
-
-# -----------------------------------------------------------------------------
-# SCORING & FILTERING THRESHOLDS
-# -----------------------------------------------------------------------------
-MIN_SCORE = 5               # Articles below this score are discarded
-SECONDARY_MIN_SCORE = 7     # Min score for HBR / McKinsey / newsletter sources
-
-MAX_ARTICLES_NEWS    = 20   # Max articles in Section 1 (What's Happening)
-MAX_ARTICLES_CULTURE = 5    # Max articles in Section 2 (Art & Culture)
-MAX_ARTICLES_THOUGHT = 5    # Max articles in Section 3 (Thought Leadership)
-MAX_TOTAL = 30              # Hard cap across all sections
-
-# Deduplication: articles with title cosine similarity above this are merged
 DEDUP_THRESHOLD = 0.75
-
-# Trending score: (reddit_upvotes / REDDIT_DIVISOR) + (hn_score / HN_DIVISOR), capped at TRENDING_CAP
-REDDIT_DIVISOR  = 1000
-HN_DIVISOR      = 100
-TRENDING_CAP    = 3.0
-TRENDING_BADGE_THRESHOLD = 1.5   # Trending badge shown if score >= this
 
 # -----------------------------------------------------------------------------
 # OUTPUT PATHS
@@ -136,10 +113,3 @@ TRENDING_BADGE_THRESHOLD = 1.5   # Trending badge shown if score >= this
 DOCS_DIR        = "docs"
 DIGEST_FILENAME = "{date}.html"     # e.g. 2026-04-17.html
 INDEX_FILENAME  = "index.html"
-
-# -----------------------------------------------------------------------------
-# AI MODEL
-# -----------------------------------------------------------------------------
-GEMINI_MODEL = "gemini-2.5-flash"
-GEMINI_MAX_RETRIES = 1
-GEMINI_RETRY_DELAY = 5   # seconds between retries on rate limit
