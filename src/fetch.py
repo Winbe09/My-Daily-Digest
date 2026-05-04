@@ -7,13 +7,10 @@ import feedparser
 import requests
 from bs4 import BeautifulSoup
 from datetime import datetime, timezone, timedelta
-import time
 import logging
 
 from config import (
     RSS_SOURCES, SECONDARY_RSS_SOURCES, SCRAPE_SOURCES, NEWSLETTER_SOURCES,
-    REDDIT_SUBREDDITS, HN_STORY_LIMIT,
-    REDDIT_DIVISOR, HN_DIVISOR, TRENDING_CAP, TRENDING_BADGE_THRESHOLD,
 )
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
@@ -139,88 +136,6 @@ def scrape_source(source):
 
 
 # =============================================================================
-# SOCIAL TRENDING SIGNALS
-# =============================================================================
-
-def fetch_reddit_posts():
-    """Fetch top posts from configured subreddits. Returns list of {title, score}."""
-    posts = []
-    for sub in REDDIT_SUBREDDITS:
-        url = f"https://www.reddit.com/r/{sub}/top.json?t=day&limit=20"
-        try:
-            resp = requests.get(url, headers=HEADERS, timeout=REQUEST_TIMEOUT)
-            resp.raise_for_status()
-            data = resp.json()
-            for child in data.get("data", {}).get("children", []):
-                p = child.get("data", {})
-                posts.append({
-                    "title": p.get("title", ""),
-                    "score": p.get("score", 0),
-                    "subreddit": sub,
-                })
-            time.sleep(0.5)   # be polite to Reddit
-        except Exception as e:
-            log.warning(f"  Reddit r/{sub} failed: {e}")
-    log.info(f"Fetched {len(posts)} Reddit posts across {len(REDDIT_SUBREDDITS)} subreddits")
-    return posts
-
-
-def fetch_hn_posts():
-    """Fetch top Hacker News stories. Returns list of {title, score}."""
-    posts = []
-    try:
-        url = f"https://hn.algolia.com/api/v1/search?tags=front_page&hitsPerPage={HN_STORY_LIMIT}"
-        resp = requests.get(url, headers=HEADERS, timeout=REQUEST_TIMEOUT)
-        resp.raise_for_status()
-        for hit in resp.json().get("hits", []):
-            posts.append({
-                "title": hit.get("title", ""),
-                "score": hit.get("points", 0),
-            })
-        log.info(f"Fetched {len(posts)} HN stories")
-    except Exception as e:
-        log.warning(f"  HN fetch failed: {e}")
-    return posts
-
-
-def _jaccard_similarity(a, b):
-    """Token-level Jaccard similarity between two strings."""
-    sa = set(a.lower().split())
-    sb = set(b.lower().split())
-    if not sa or not sb:
-        return 0.0
-    return len(sa & sb) / len(sa | sb)
-
-
-def enrich_with_trending(articles, reddit_posts, hn_posts):
-    """
-    Compute a trending score for each article by matching it against
-    Reddit and HN posts. Mutates articles in place.
-    """
-    for article in articles:
-        title = article["title"]
-        reddit_score = 0
-        hn_score = 0
-
-        for post in reddit_posts:
-            if _jaccard_similarity(title, post["title"]) >= 0.4:
-                reddit_score = max(reddit_score, post["score"])
-
-        for post in hn_posts:
-            if _jaccard_similarity(title, post["title"]) >= 0.4:
-                hn_score = max(hn_score, post["score"])
-
-        trending = min(
-            (reddit_score / REDDIT_DIVISOR) + (hn_score / HN_DIVISOR),
-            TRENDING_CAP,
-        )
-        article["trending_score"] = round(trending, 2)
-        article["is_trending"] = trending >= TRENDING_BADGE_THRESHOLD
-
-    return articles
-
-
-# =============================================================================
 # MAIN FETCH ORCHESTRATOR
 # =============================================================================
 
@@ -249,11 +164,6 @@ def fetch_all():
         for a in fetched:
             a["is_newsletter"] = True
         articles.extend(fetched)
-
-    # Trending signals
-    reddit_posts = fetch_reddit_posts()
-    hn_posts     = fetch_hn_posts()
-    articles     = enrich_with_trending(articles, reddit_posts, hn_posts)
 
     log.info(f"Total articles fetched (pre-dedup): {len(articles)}")
     return articles
